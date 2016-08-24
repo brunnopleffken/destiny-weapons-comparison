@@ -31,13 +31,12 @@ class HomeController < ApplicationController
 
     # Define basic parameters
     source = URI('https://www.bungie.net/Platform/Destiny/Explorer/Items/')
-    token = Rails.configuration.destiny_api_key
     parameters = { :definitions => true, :lc => 'pt-br', :name => weapon_name }
     source.query = URI.encode_www_form(parameters)
 
     # Create new HTTP request
     request = Net::HTTP::Get.new(source)
-    request['X-Api-Key'] = token
+    request['X-Api-Key'] = Rails.configuration.destiny_api_key
 
     # Get response
     response = Net::HTTP.start(source.hostname, source.port, :use_ssl => source.scheme == 'https') do |http|
