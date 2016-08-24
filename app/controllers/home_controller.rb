@@ -26,6 +26,9 @@ class HomeController < ApplicationController
   private
 
   def get_weapon_stats(weapon_name)
+    # Check if API key is defined in config/initializers
+    raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
+
     # Define basic parameters
     source = URI('https://www.bungie.net/Platform/Destiny/Explorer/Items/')
     token = Rails.configuration.destiny_api_key
