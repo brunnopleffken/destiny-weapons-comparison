@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Destiny Weapons Comparison</title>
+    <meta name="description" content="">
+    <meta name="author" content="Brunno Pleffken Hosti">
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="/" class="navbar-brand">Destiny Weapons Comparison</a>
+        </div>
+      </div>
+    </nav>
+
+    <%= yield %>
+  </body>
+</html>

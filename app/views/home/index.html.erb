@@ -1,0 +1,97 @@
+<%= render 'shared/search' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="attributes">&nbsp;</th>
+            <th class="primary tier-<%= @primary['tierType'] %>">
+              <img src="https://www.bungie.net/<%= @primary['icon'] %>" align="left">
+              <h1><%= @primary['itemName'] %></h1>
+              <h2><%= @primary['itemTypeName'] %></h2>
+              <span class="tier"><%= @primary['tierTypeName'] %></span>
+              <!-- <blockquote>Uma arma de precisão, forjada no fogo pelos Senhores da Bandeira de Ferro.</blockquote> -->
+            </th>
+            <th class="secondary tier-<%= @secondary['tierType'] %>">
+              <img src="https://www.bungie.net/<%= @secondary['icon'] %>" align="left">
+              <h1><%= @secondary['itemName'] %></h1>
+              <h2><%= @secondary['itemTypeName'] %></h2>
+              <span class="tier"><%= @secondary['tierTypeName'] %></span>
+              <!-- <blockquote>Selecione aplicação: Confronto balístico. Ferramenta de entrincheiramento. Rede de aviônica. Esmagador de trolls. Sextante estelar. A lista continua.</blockquote> -->
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td><blockquote><%= @primary['itemDescription'] %></blockquote></td>
+            <td><blockquote><%= @secondary['itemDescription'] %></blockquote></td>
+          </tr>
+          <tr class="section-name">
+            <td colspan="3">Estatísticas base</td>
+          </tr>
+          <tr>
+            <td>Ataque</td>
+            <td><%= @primary['stats'][@attack]['minimum'] %>-<%= @primary['stats'][@attack]['maximum'] %></td>
+            <td><%= @secondary['stats'][@attack]['minimum'] %>-<%= @secondary['stats'][@attack]['maximum'] %></td>
+          </tr>
+          <tr>
+            <td>Cadência</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@rate_of_fire]['value'] %>%;"><%= @primary['stats'][@rate_of_fire]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@rate_of_fire]['value'] %>%;"><%= @secondary['stats'][@rate_of_fire]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Impacto</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@impact]['value'] %>%;"><%= @primary['stats'][@impact]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@impact]['value'] %>%;"><%= @secondary['stats'][@impact]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Alcance</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@range]['value'] %>%;"><%= @primary['stats'][@range]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@range]['value'] %>%;"><%= @secondary['stats'][@range]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Estabilidade</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@stability]['value'] %>%;"><%= @primary['stats'][@stability]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@stability]['value'] %>%;"><%= @secondary['stats'][@stability]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Recarga</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@reload]['value'] %>%;"><%= @primary['stats'][@reload]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@reload]['value'] %>%;"><%= @secondary['stats'][@reload]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Carregador</td>
+            <td><%= @primary['stats'][@magazine]['value'] %></td>
+            <td><%= @secondary['stats'][@magazine]['value'] %></td>
+          </tr>
+          <tr class="section-name">
+            <td colspan="3">Estatísticas ocultas</td>
+          </tr>
+          <tr>
+            <td>Assistência de mira</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@aim_assist]['value'] %>%;"><%= @primary['stats'][@aim_assist]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@aim_assist]['value'] %>%;"><%= @secondary['stats'][@aim_assist]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Manuseio</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@equip_speed]['value'] %>%;"><%= @primary['stats'][@equip_speed]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@equip_speed]['value'] %>%;"><%= @secondary['stats'][@equip_speed]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Direção de recuo</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@recoil]['value'] %>%;"><%= @primary['stats'][@recoil]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@recoil]['value'] %>%;"><%= @secondary['stats'][@recoil]['value'] %></div></div></td>
+          </tr>
+          <tr>
+            <td>Zoom base</td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@zoom]['value'] %>%;"><%= @primary['stats'][@zoom]['value'] %></div></div></td>
+            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@zoom]['value'] %>%;"><%= @secondary['stats'][@zoom]['value'] %></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

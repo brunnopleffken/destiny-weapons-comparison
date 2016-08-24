@@ -1,0 +1,97 @@
+body {
+  background-image: image-url('gradient_green.jpg');
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+  color: #fff;
+}
+
+.table {
+  thead {
+    tr {
+      th {
+        vertical-align: top;
+        &.attributes { width: 15%; }
+        &.primary, &.secondary { position: relative; width: 42.5%; }
+        &.tier-1, &.tier-2 { background: rgba(245,245,245,.9); color: #1e242b !important; }
+        &.tier-3 { background: rgba(47,107,60,.9); }
+        &.tier-4 { background: rgba(85,127,158,.9); }
+        &.tier-5 { background: rgba(78,50,99,.9); }
+        &.tier-6 { background: rgba(206,174,50,.9); }
+        img {
+          border: 3px solid #fff;
+          margin-right: 10px;
+          height: 80px;
+          width: 80px;
+        }
+        h1 {
+          font-size: 24px;
+          font-weight: bold;
+          margin: 0;
+          text-transform: uppercase;
+        }
+        h2 {
+          font-size: 16px;
+          font-weight: normal;
+          margin: 0;
+          margin-bottom: 0.7rem;
+          opacity: 0.5;
+        }
+        .tier {
+          bottom: 5px;
+          font-size: 16px;
+          font-weight: normal;
+          position: absolute;
+          opacity: 0.2;
+          right: 10px;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        background-color: rgba(0, 0, 0, 0.7);
+        border-top: 0;
+        color: #a9a9a9;
+        &:first-child {
+          font-weight: bold;
+          text-align: right;
+        }
+        blockquote {
+          border: 0;
+          font-family: 'Lato', sans-serif;
+          font-size: 14px;
+          font-style: italic;
+          font-weight: normal;
+          line-height: 1.4em;
+          margin: 0;
+          padding: 0;
+        }
+      }
+      &.section-name {
+        td {
+          font-size: 20px;
+          text-transform: uppercase;
+          text-align: left;
+        }
+      }
+    }
+  }
+}
+
+.progress {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  box-shadow: none;
+  // height: 25px;
+  margin-bottom: 0;
+  .progress-bar {
+    background-color: #fff;
+    box-shadow: none;
+    color: #aaa;
+    // line-height: 25px;
+    padding-left: 1rem;
+    text-align: left;
+  }
+}
