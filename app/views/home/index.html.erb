@@ -72,7 +72,7 @@
             <td>Carregador</td>
             <td><%= @primary['stats'][@magazine]['value'] %></td>
             <td><%= @secondary['stats'][@magazine]['value'] %></td>
-            <td></td>
+            <td><%= magazine_diff(@primary['stats'][@magazine]['value'], @secondary['stats'][@magazine]['value']) %></td>
           </tr>
           <tr class="section-name">
             <td colspan="4">Estatísticas ocultas</td>

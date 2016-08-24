@@ -16,4 +16,18 @@ module ApplicationHelper
     return html.html_safe
   end
 
+  def magazine_diff(first_weapon_stat, second_weapon_stat)
+    diff_value = first_weapon_stat - second_weapon_stat
+
+    if diff_value < 0
+      html = "<span class='upper'>#{second_weapon_stat} ▲</span>"
+    elsif diff_value > 0
+      html = "<span class='down'>#{second_weapon_stat} ▼</span>"
+    else
+      html = ""
+    end
+
+    return html.html_safe
+  end
+
 end

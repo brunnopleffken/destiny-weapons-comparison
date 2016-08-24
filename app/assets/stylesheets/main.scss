@@ -85,6 +85,10 @@ body {
           margin: 0;
           padding: 0;
         }
+        span {
+          &.upper { color: #7fc67a; }
+          &.down { color: #813b3b; }
+        }
       }
       &.section-name {
         td {
