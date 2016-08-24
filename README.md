@@ -1,24 +1,16 @@
-# README
+# Destiny Weapons Comparison
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Compare any weapon from the game Destiny directly from their API. No database storage. No further dependencies. Just pure Ruby!
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+* Ruby on Rails 5.0 or higher;
+* And that's all!
 
-* System dependencies
+## Installing
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Clone the repository into your machine;
+* Run `gem install` to install all RoR dependencies;
+* Open the file `config/initializers/destiny_api.rb` and insert your Bungie API key;
+* Open Terminal, run `rails s` and in your browser go to `http://localhost:3000`;
+* Everything should be working fine!
