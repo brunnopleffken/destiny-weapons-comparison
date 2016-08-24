@@ -6,6 +6,18 @@ body {
   color: #fff;
 }
 
+.navbar {
+  border-radius: 0;
+  &.navbar-default {
+    background-color: #000;
+    border: 0;
+    border-bottom: 2px solid #fff;
+    .navbar-brand {
+      color: #fff;
+    }
+  }
+}
+
 .table {
   thead {
     tr {
@@ -20,7 +32,7 @@ body {
         &.tier-5 { background: rgba(78,50,99,.9); }
         &.tier-6 { background: rgba(206,174,50,.9); }
         img {
-          border: 3px solid #fff;
+          border: 2px solid #fff;
           margin-right: 10px;
           height: 80px;
           width: 80px;

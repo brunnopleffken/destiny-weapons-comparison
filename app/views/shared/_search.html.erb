@@ -1,33 +1,19 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-12 col-lg-10 col-lg-offset-1">
-      <div class="alert alert-info">
-        Sempre compare armas da mesma classe (ex: fuzil de batedor com outro batedor, sniper com outra sniper).
-      </div>
-    </div>
-  </div>
-
-  <form action="">
+  <form action="/" id="search-form" class="form-inline">
     <div class="row">
-      <div class="col-md-12 col-lg-10 col-lg-offset-1">
-        <div class="row">
-          <div class="col-sm-5">
-            <div class="form-group">
-              <label for="first-weapon">Comparar...</label>
-              <input type="text" class="form-control" id="first-weapon" name="first-weapon">
-            </div>
-          </div>
-          <div class="col-sm-5">
-            <div class="form-group">
-              <label for="first-weapon">Com...</label>
-              <input type="text" class="form-control" id="first-weapon" name="first-weapon">
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <button type="submit" class="btn btn-default btn-block">Comparar</button>
-          </div>
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <div class="form-group">
+          <label for="primary-weapon">Comparar...</label>
+          <input type="text" class="form-control" id="primary-weapon" name="primary-weapon" placeholder="Ex: Encarada de 1000 Jardas" required>
         </div>
+        <div class="form-group">
+          <label for="secondary-weapon">...com...</label>
+          <input type="text" class="form-control" id="secondary-weapon" name="secondary-weapon" placeholder="Ex: Irene RR4" required>
+        </div>
+        <button type="submit" class="btn btn-default">Comparar</button>
       </div>
     </div>
   </form>
 </div>
+
+<hr>
