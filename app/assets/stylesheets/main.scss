@@ -9,11 +9,15 @@ body {
 .navbar {
   border-radius: 0;
   &.navbar-default {
-    background-color: #000;
+    background-color: #758181;
     border: 0;
-    border-bottom: 2px solid #fff;
+    border-bottom: 4px solid #919c9c;
     .navbar-brand {
       color: #fff;
+    }
+    .navbar-text {
+      color: #fff;
+      opacity: 0.4;
     }
   }
 }
