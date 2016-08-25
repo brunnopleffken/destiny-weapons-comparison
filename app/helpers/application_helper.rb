@@ -1,10 +1,14 @@
 module ApplicationHelper
 
+  # Return an IMG tag with the icon of the damage type
+  #
   def damage_type(damage)
     html = "<img src='https://www.bungie.net/#{damage[:damageIconPath]}' title='#{damage[:damageTypeName]}' class='damage-type-icon'>"
     return html.html_safe
   end
 
+  # Return a DIV with image and text with the source of the weapon
+  #
   def source_type(source)
     html = ""
     unless source.nil?
@@ -13,6 +17,8 @@ module ApplicationHelper
     return html.html_safe
   end
 
+  # Auto-generate diff stacked progress bar
+  #
   def stats_diff(first_weapon_stat, second_weapon_stat)
     diff_value = first_weapon_stat - second_weapon_stat
 
@@ -29,6 +35,8 @@ module ApplicationHelper
     return html.html_safe
   end
 
+  # Return the difference of the weapons' magazine
+  #
   def magazine_diff(first_weapon_stat, second_weapon_stat)
     diff_value = first_weapon_stat - second_weapon_stat
 
