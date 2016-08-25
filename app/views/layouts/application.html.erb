@@ -18,13 +18,22 @@
         <div class="navbar-header">
           <a href="/" class="navbar-brand">Destiny Weapons Comparison</a>
         </div>
+        <div class="navbar-form navbar-left">
+          <form action="/home/change_language" method="post">
+            <div class="form-group">
+              <select class="form-control">
+                <optgroup label="Languages">
+                  <option value="pt-br" selected>Português (Brasil)</option>
+                </optgroup>
+              </select>
+            </div>
+          </form>
+        </div>
         <div class="nav navbar-nav navbar-right">
           <p class="navbar-text">Sempre compare armas da mesma classe (ex: fuzil de batedor com outro batedor, sniper com outra sniper).</p>
         </div>
       </div>
     </nav>
-
-    <!-- Sempre compare armas da mesma classe (ex: fuzil de batedor com outro batedor, sniper com outra sniper). -->
 
     <%= yield %>
   </body>
