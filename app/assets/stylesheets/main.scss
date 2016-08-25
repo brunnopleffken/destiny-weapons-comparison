@@ -22,6 +22,35 @@ body {
   }
 }
 
+form {
+  .form-control {
+    background-color: transparent;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    color: #fff;
+    padding-left: 0;
+    padding-right: 0;
+    &:focus {
+      box-shadow: none;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    }
+  }
+  .btn {
+    border-radius: 0;
+    &.btn-default {
+      background-color: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: none;
+      color: #a9a9a9;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
 .home {
   h1 {
     text-transform: uppercase;
@@ -44,10 +73,15 @@ body {
   }
 }
 
+.search {
+  margin-bottom: 40px;
+}
+
 .table {
   thead {
     tr {
       th {
+        border-bottom: 0;
         vertical-align: top;
         &.primary, &.secondary { position: relative;}
         &.tier-1, &.tier-2 { background: rgba(245,245,245,.9); color: #1e242b !important; }
