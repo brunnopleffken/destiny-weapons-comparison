@@ -40,7 +40,7 @@ class HomeController < ApplicationController
 
     # Define basic parameters
     source = URI('https://www.bungie.net/Platform/Destiny/Explorer/Items/')
-    parameters = { :definitions => true, :lc => 'pt-br', :name => weapon_name }
+    parameters = { :definitions => true, :lc => 'pt-br', :name => weapon_name, :order => 'MaximumRequiredLevel' }
     source.query = URI.encode_www_form(parameters)
 
     # Create new HTTP request
