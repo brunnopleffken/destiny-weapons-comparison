@@ -185,6 +185,51 @@ body {
   }
 }
 
+.error-container {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-top: 3px solid #813b3b;
+  color: #a9a9a9;
+  margin-top: 150px;
+  padding: 40px;
+  .title {
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .error-image-container {
+    height: 100px;
+    position: relative;
+    width: 100px;
+    .outer-circle {
+      border: 10px solid #962f30;
+      border-radius: 50px;
+      position: absolute;
+      height: 100px;
+      width: 100px;
+    }
+    .inner-circle {
+      background-color: #962f30;
+      border-radius: 50px;
+      left: 17px;
+      position: absolute;
+      top: 17px;
+      height: 66px;
+      width: 66px;
+    }
+    .exclamation-mark {
+      color: rgb(41, 49, 49);
+      font-size: 64px;
+      font-weight: bold;
+      position: absolute;
+      text-align: center;
+      line-height: 100px;
+      width: 100px;
+    }
+  }
+}
+
 footer {
   background-color: #000;
   border-top: 2px solid #fff;
