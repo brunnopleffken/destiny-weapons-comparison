@@ -34,7 +34,7 @@ module ApplicationHelper
     elsif diff_value > 0
       html = "<span class='down'>#{second_weapon_stat} ▼</span>"
     else
-      html = ""
+      html = "#{first_weapon_stat}"
     end
 
     return html.html_safe
