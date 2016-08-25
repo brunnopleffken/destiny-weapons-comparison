@@ -1,139 +1,22 @@
-<%= render 'shared/search' %>
-
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="attributes">&nbsp;</th>
-            <th class="primary tier-<%= @primary['tierType'] %>">
-              <img src="https://www.bungie.net/<%= @primary['icon'] %>" align="left">
-              <h1><%= @primary['itemName'] %></h1>
-              <h2><%= @primary['itemTypeName'] %></h2>
-              <span class="tier"><%= @primary['tierTypeName'] %></span>
-            </th>
-            <th class="secondary tier-<%= @secondary['tierType'] %>">
-              <img src="https://www.bungie.net/<%= @secondary['icon'] %>" align="left">
-              <h1><%= @secondary['itemName'] %></h1>
-              <h2><%= @secondary['itemTypeName'] %></h2>
-              <span class="tier"><%= @secondary['tierTypeName'] %></span>
-            </th>
-            <th class="comparison"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td><blockquote><%= @primary['itemDescription'] %></blockquote></td>
-            <td><blockquote><%= @secondary['itemDescription'] %></blockquote></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Tipos de dano</td>
-            <td>
-              <% @primary['damageTypes'].each do |damage| %>
-                <%= damage_type(@damage_types[damage]) %>
-              <% end %>
-            </td>
-            <td>
-              <% @secondary['damageTypes'].each do |damage| %>
-                <%= damage_type(@damage_types[damage]) %>
-              <% end %>
-            </td>
-            <td></td>
-          </tr>
-          <tr class="section-name">
-            <td colspan="4">Estatísticas base</td>
-          </tr>
-          <tr>
-            <td>Ataque</td>
-            <td><%= @primary['stats'][@attack]['minimum'] %>-<%= @primary['stats'][@attack]['maximum'] %></td>
-            <td><%= @secondary['stats'][@attack]['minimum'] %>-<%= @secondary['stats'][@attack]['maximum'] %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Cadência</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@rate_of_fire]['value'] %>%;"><%= @primary['stats'][@rate_of_fire]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@rate_of_fire]['value'] %>%;"><%= @secondary['stats'][@rate_of_fire]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@rate_of_fire]['value'], @secondary['stats'][@rate_of_fire]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Impacto</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@impact]['value'] %>%;"><%= @primary['stats'][@impact]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@impact]['value'] %>%;"><%= @secondary['stats'][@impact]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@impact]['value'], @secondary['stats'][@impact]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Alcance</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@range]['value'] %>%;"><%= @primary['stats'][@range]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@range]['value'] %>%;"><%= @secondary['stats'][@range]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@range]['value'], @secondary['stats'][@range]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Estabilidade</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@stability]['value'] %>%;"><%= @primary['stats'][@stability]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@stability]['value'] %>%;"><%= @secondary['stats'][@stability]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@stability]['value'], @secondary['stats'][@stability]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Recarga</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@reload]['value'] %>%;"><%= @primary['stats'][@reload]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@reload]['value'] %>%;"><%= @secondary['stats'][@reload]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@reload]['value'], @secondary['stats'][@reload]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Carregador</td>
-            <td><%= @primary['stats'][@magazine]['value'] %></td>
-            <td><%= @secondary['stats'][@magazine]['value'] %></td>
-            <td><%= magazine_diff(@primary['stats'][@magazine]['value'], @secondary['stats'][@magazine]['value']) %></td>
-          </tr>
-          <tr class="section-name">
-            <td colspan="4">Estatísticas ocultas</td>
-          </tr>
-          <tr>
-            <td>Assistência de mira</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@aim_assist]['value'] %>%;"><%= @primary['stats'][@aim_assist]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@aim_assist]['value'] %>%;"><%= @secondary['stats'][@aim_assist]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@aim_assist]['value'], @secondary['stats'][@aim_assist]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Manuseio</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@equip_speed]['value'] %>%;"><%= @primary['stats'][@equip_speed]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@equip_speed]['value'] %>%;"><%= @secondary['stats'][@equip_speed]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@equip_speed]['value'], @secondary['stats'][@equip_speed]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Direção de recuo</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@recoil]['value'] %>%;"><%= @primary['stats'][@recoil]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@recoil]['value'] %>%;"><%= @secondary['stats'][@recoil]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@recoil]['value'], @secondary['stats'][@recoil]['value']) %></td>
-          </tr>
-          <tr>
-            <td>Zoom base</td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@zoom]['value'] %>%;"><%= @primary['stats'][@zoom]['value'] %></div></div></td>
-            <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@zoom]['value'] %>%;"><%= @secondary['stats'][@zoom]['value'] %></div></div></td>
-            <td><%= stats_diff(@primary['stats'][@zoom]['value'], @secondary['stats'][@zoom]['value']) %></td>
-          </tr>
-          <tr class="section-name">
-            <td colspan="4">Outras informações</td>
-          </tr>
-          <tr>
-            <td>Onde obter?</td>
-            <td>
-              <% @primary['sourceHashes'].each do |source| %>
-                <%= source_type(@source_types[source]) %>
-              <% end %>
-            </td>
-            <td>
-              <% @secondary['sourceHashes'].each do |source| %>
-                <%= source_type(@source_types[source]) %>
-              <% end %>
-            </td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-xs-12">
+      <h1>Destiny Weapons Comparison</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <form action="/" id="search-form">
+        <div class="form-group">
+          <label for="primary-weapon">Comparar...</label>
+          <input type="text" class="form-control input-lg" id="primary-weapon" name="primary-weapon" placeholder="Ex: Encarada de 1000 Jardas" required>
+        </div>
+        <div class="form-group">
+          <label for="secondary-weapon">Com...</label>
+          <input type="text" class="form-control input-lg" id="secondary-weapon" name="secondary-weapon" placeholder="Ex: Irene RR4" required>
+        </div>
+        <button class="btn btn-success btn-block btn-lg">Comparar</button>
+      </form>
     </div>
   </div>
 </div>

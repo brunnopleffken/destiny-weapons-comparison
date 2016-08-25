@@ -1,6 +1,10 @@
 class HomeController < ApplicationController
 
   def index
+    #
+  end
+
+  def compare
     # Get parameters
     @primary_weapon = params[:primary]
     @secondary_weapon = params[:secondary]

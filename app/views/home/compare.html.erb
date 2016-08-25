@@ -1,0 +1,402 @@
+<%= render 'shared/search' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="col-xs-2">&nbsp;</th>
+            <th class="col-xs-4 primary tier-<%= @primary['tierType'] %>">
+              <img src="https://www.bungie.net/<%= @primary['icon'] %>">
+              <h1><%= @primary['itemName'] %></h1>
+              <h2><%= @primary['itemTypeName'] %></h2>
+              <span class="tier"><%= @primary['tierTypeName'] %></span>
+            </th>
+            <th class="col-xs-4 secondary tier-<%= @secondary['tierType'] %>">
+              <img src="https://www.bungie.net/<%= @secondary['icon'] %>">
+              <h1><%= @secondary['itemName'] %></h1>
+              <h2><%= @secondary['itemTypeName'] %></h2>
+              <span class="tier"><%= @secondary['tierTypeName'] %></span>
+            </th>
+            <th class="col-xs-2">&nbsp;</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>&nbsp;</td>
+            <td><blockquote><%= @primary['itemDescription'] %></blockquote></td>
+            <td><blockquote><%= @secondary['itemDescription'] %></blockquote></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>Tipos de dano</td>
+            <td>
+              <% @primary['damageTypes'].each do |damage| %>
+                <%= damage_type(@damage_types[damage]) %>
+              <% end %>
+            </td>
+            <td>
+              <% @secondary['damageTypes'].each do |damage| %>
+                <%= damage_type(@damage_types[damage]) %>
+              <% end %>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr class="section-name">
+            <td colspan="4">Estatísticas base</td>
+          </tr>
+          <tr>
+            <td>Ataque</td>
+            <td><%= @primary['stats'][@attack]['minimum'] %>/<%= @primary['stats'][@attack]['maximum'] %></td>
+            <td><%= @secondary['stats'][@attack]['minimum'] %>/<%= @secondary['stats'][@attack]['maximum'] %></td>
+            <td></td>
+          </tr>
+
+          <tr>
+            <td>Cadência</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@rate_of_fire]['value'] %>%;">
+                      <%= @primary['stats'][@rate_of_fire]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@rate_of_fire]['minimum'] %>/<%= @primary['stats'][@rate_of_fire]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@rate_of_fire]['value'] %>%;">
+                      <%= @secondary['stats'][@rate_of_fire]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@rate_of_fire]['minimum'] %>/<%= @secondary['stats'][@rate_of_fire]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@rate_of_fire]['value'], @secondary['stats'][@rate_of_fire]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Impacto</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@impact]['value'] %>%;">
+                      <%= @primary['stats'][@impact]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@impact]['minimum'] %>/<%= @primary['stats'][@impact]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@impact]['value'] %>%;">
+                      <%= @secondary['stats'][@impact]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@impact]['minimum'] %>/<%= @secondary['stats'][@impact]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@impact]['value'], @secondary['stats'][@impact]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Alcance</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@range]['value'] %>%;">
+                      <%= @primary['stats'][@range]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@range]['minimum'] %>/<%= @primary['stats'][@range]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@range]['value'] %>%;">
+                      <%= @secondary['stats'][@range]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@range]['minimum'] %>/<%= @secondary['stats'][@range]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@range]['value'], @secondary['stats'][@range]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Estabilidade</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@stability]['value'] %>%;">
+                      <%= @primary['stats'][@stability]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@stability]['minimum'] %>/<%= @primary['stats'][@stability]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@stability]['value'] %>%;">
+                      <%= @secondary['stats'][@stability]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@stability]['minimum'] %>/<%= @secondary['stats'][@stability]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@stability]['value'], @secondary['stats'][@stability]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Recarga</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@reload]['value'] %>%;">
+                      <%= @primary['stats'][@reload]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@reload]['minimum'] %>/<%= @primary['stats'][@reload]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@reload]['value'] %>%;">
+                      <%= @secondary['stats'][@reload]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@reload]['minimum'] %>/<%= @secondary['stats'][@reload]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@reload]['value'], @secondary['stats'][@reload]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Carregador</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9"><%= @primary['stats'][@magazine]['value'] %></div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@magazine]['minimum'] %>/<%= @primary['stats'][@magazine]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9"><%= @secondary['stats'][@magazine]['value'] %></div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@magazine]['minimum'] %>/<%= @secondary['stats'][@magazine]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= magazine_diff(@primary['stats'][@magazine]['value'], @secondary['stats'][@magazine]['value']) %></td>
+          </tr>
+
+          <tr class="section-name">
+            <td colspan="4">Estatísticas ocultas</td>
+          </tr>
+
+          <tr>
+            <td>Assistência de mira</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@aim_assist]['value'] %>%;">
+                      <%= @primary['stats'][@aim_assist]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@aim_assist]['minimum'] %>/<%= @primary['stats'][@aim_assist]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@aim_assist]['value'] %>%;">
+                      <%= @secondary['stats'][@aim_assist]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@aim_assist]['minimum'] %>/<%= @secondary['stats'][@aim_assist]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@aim_assist]['value'], @secondary['stats'][@aim_assist]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Manuseio</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@equip_speed]['value'] %>%;">
+                      <%= @primary['stats'][@equip_speed]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@equip_speed]['minimum'] %>/<%= @primary['stats'][@equip_speed]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@equip_speed]['value'] %>%;">
+                      <%= @secondary['stats'][@equip_speed]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@equip_speed]['minimum'] %>/<%= @secondary['stats'][@equip_speed]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@equip_speed]['value'], @secondary['stats'][@equip_speed]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Direção de recuo</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@recoil]['value'] %>%;">
+                      <%= @primary['stats'][@recoil]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@recoil]['minimum'] %>/<%= @primary['stats'][@recoil]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@recoil]['value'] %>%;">
+                      <%= @secondary['stats'][@recoil]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@recoil]['minimum'] %>/<%= @secondary['stats'][@recoil]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@recoil]['value'], @secondary['stats'][@recoil]['value']) %></td>
+          </tr>
+
+          <tr>
+            <td>Zoom</td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @primary['stats'][@zoom]['value'] %>%;">
+                      <%= @primary['stats'][@zoom]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @primary['stats'][@zoom]['minimum'] %>/<%= @primary['stats'][@zoom]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-xs-9">
+                  <div class="progress">
+                    <div class="progress-bar" style="width: <%= @secondary['stats'][@zoom]['value'] %>%;">
+                      <%= @secondary['stats'][@zoom]['value'] %>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= @secondary['stats'][@zoom]['minimum'] %>/<%= @secondary['stats'][@zoom]['maximum'] %>
+                </div>
+              </div>
+            </td>
+            <td><%= stats_diff(@primary['stats'][@zoom]['value'], @secondary['stats'][@zoom]['value']) %></td>
+          </tr>
+
+          <tr class="section-name">
+            <td colspan="4">Outras informações</td>
+          </tr>
+
+          <tr>
+            <td>Onde obter?</td>
+            <td>
+              <% @primary['sourceHashes'].each do |source| %>
+                <%= source_type(@source_types[source]) %>
+              <% end %>
+            </td>
+            <td>
+              <% @secondary['sourceHashes'].each do |source| %>
+                <%= source_type(@source_types[source]) %>
+              <% end %>
+            </td>
+            <td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
