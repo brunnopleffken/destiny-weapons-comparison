@@ -13,9 +13,17 @@ class HomeController < ApplicationController
     @damage_types = {}
     @source_types = {}
 
+    # Check if user is trying to compare Y1 with Y2 weapon
+    if @primary_weapon == @secondary_weapon
+      primary_order = 'Descending'
+      secondary_order = 'Ascending'
+    else
+      primary_order = secondary_order = 'Ascending'
+    end
+
     # Get weapons data and stats
-    @primary = parse_weapon_stats(get_weapon_stats(@primary_weapon))
-    @secondary = parse_weapon_stats(get_weapon_stats(@secondary_weapon))
+    @primary = parse_weapon_stats(get_weapon_stats(@primary_weapon, primary_order))
+    @secondary = parse_weapon_stats(get_weapon_stats(@secondary_weapon, secondary_order))
 
     # Dictionary
     @attack = '368428387'
@@ -34,16 +42,22 @@ class HomeController < ApplicationController
 
   private
 
-  def get_weapon_stats(weapon_name)
+  def get_weapon_stats(weapon_name, direction)
     # Check if API key is defined in config/initializers
     raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
 
     # Define basic parameters
     source = URI('https://www.bungie.net/Platform/Destiny/Explorer/Items/')
-    parameters = { :definitions => true, :lc => 'pt-br', :name => weapon_name, :order => 'MaximumRequiredLevel' }
-    source.query = URI.encode_www_form(parameters)
+    parameters = {
+      :definitions => true,
+      :lc => 'pt-br',
+      :name => weapon_name,
+      :order => 'MaximumRequiredLevel',
+      :direction => direction
+    }
 
     # Create new HTTP request
+    source.query = URI.encode_www_form(parameters)
     request = Net::HTTP::Get.new(source)
     request['X-Api-Key'] = Rails.configuration.destiny_api_key
 
