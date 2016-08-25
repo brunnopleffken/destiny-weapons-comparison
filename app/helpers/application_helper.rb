@@ -3,7 +3,7 @@ module ApplicationHelper
   # Return an IMG tag with the icon of the damage type
   #
   def damage_type(damage)
-    html = "<img src='https://www.bungie.net/#{damage[:damageIconPath]}' title='#{damage[:damageTypeName]}' class='damage-type-icon'>"
+    html = "<img src='https://www.bungie.net/#{damage[:damageIconPath]}' title='#{damage[:damageTypeName]}' class='damage-type-icon' data-toggle='tooltip' data-placement='top'>"
     return html.html_safe
   end
 

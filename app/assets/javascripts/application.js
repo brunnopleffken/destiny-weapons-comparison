@@ -5,6 +5,16 @@
 
 
 $(document).ready(function() {
+
+  /**
+   * Initialize Bootstrap components
+   */
+  $('[data-toggle="tooltip"]').tooltip();
+
+
+  /**
+   * Search form
+   */
   $('#search-form').on('submit', function(event) {
     // Get values
     var primaryWeapon = $('#primary-weapon').val();

@@ -120,6 +120,12 @@ body {
   }
 }
 
+.tooltip {
+  .tooltip-inner {
+    border-radius: 0;
+  }
+}
+
 .source {
   margin-bottom: 15px;
   overflow: hidden;
