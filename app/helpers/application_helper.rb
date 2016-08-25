@@ -6,7 +6,10 @@ module ApplicationHelper
   end
 
   def source_type(source)
-    html = "<div class='source'><img src='https://www.bungie.net/#{source[:sourceIcon]}' title='#{source[:sourceName]}' class='image'><div class='text'><span class='title'>#{source[:sourceName]}</span><span class='desc'>#{source[:sourceDesc]}</span></div></div>"
+    html = ""
+    unless source.nil?
+      html = "<div class='source'><img src='https://www.bungie.net/#{source[:sourceIcon]}' title='#{source[:sourceName]}' class='image'><div class='text'><span class='title'>#{source[:sourceName]}</span><span class='desc'>#{source[:sourceDesc]}</span></div></div>"
+    end
     return html.html_safe
   end
 
