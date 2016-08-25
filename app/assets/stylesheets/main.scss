@@ -74,6 +74,18 @@ body {
           font-weight: bold;
           text-align: right;
         }
+        &.attack {
+          span {
+            color: #fff;
+            font-size: 36px;
+            font-weight: bold;
+            line-height: 1;
+            small {
+              font-size: 20px;
+              font-weight: normal;
+            }
+          }
+        }
         .damage-type-icon { height: 30px; }
         blockquote {
           border: 0;
@@ -113,9 +125,11 @@ body {
     text-align: left;
     &.upper {
       background-color: #7fc67a;
+      min-width: 1px;
     }
     &.down {
       background-color: #813b3b;
+      min-width: 1px;
     }
   }
 }

@@ -31,7 +31,7 @@
             <td>&nbsp;</td>
           </tr>
           <tr>
-            <td>Tipos de dano</td>
+            <td>&nbsp;</td>
             <td>
               <% @primary['damageTypes'].each do |damage| %>
                 <%= damage_type(@damage_types[damage]) %>
@@ -48,9 +48,17 @@
             <td colspan="4">Estatísticas base</td>
           </tr>
           <tr>
-            <td>Ataque</td>
-            <td><%= @primary['stats'][@attack]['minimum'] %>/<%= @primary['stats'][@attack]['maximum'] %></td>
-            <td><%= @secondary['stats'][@attack]['minimum'] %>/<%= @secondary['stats'][@attack]['maximum'] %></td>
+            <td>&nbsp;</td>
+            <td class="attack">
+              <span><%= @primary['stats'][@attack]['minimum'] %><!--
+              --><small>/<%= @primary['stats'][@attack]['maximum'] %></small>
+              </span>
+            </td>
+            <td class="attack">
+              <span><%= @secondary['stats'][@attack]['minimum'] %><!--
+              --><small>/<%= @secondary['stats'][@attack]['maximum'] %></small>
+              </span>
+            </td>
             <td></td>
           </tr>
 
@@ -377,11 +385,11 @@
           </tr>
 
           <tr class="section-name">
-            <td colspan="4">Outras informações</td>
+            <td colspan="4">Onde obter esta arma?</td>
           </tr>
 
           <tr>
-            <td>Onde obter?</td>
+            <td>&nbsp;</td>
             <td>
               <% @primary['sourceHashes'].each do |source| %>
                 <%= source_type(@source_types[source]) %>
