@@ -1,5 +1,15 @@
 module ApplicationHelper
 
+  def damage_type(damage)
+    html = "<img src='https://www.bungie.net/#{damage[:damageIconPath]}' title='#{damage[:damageTypeName]}' class='damage-type-icon'>"
+    return html.html_safe
+  end
+
+  def source_type(source)
+    html = "<div class='source'><img src='https://www.bungie.net/#{source[:sourceIcon]}' title='#{source[:sourceName]}' class='image'><div class='text'><span class='title'>#{source[:sourceName]}</span><span class='desc'>#{source[:sourceDesc]}</span></div></div>"
+    return html.html_safe
+  end
+
   def stats_diff(first_weapon_stat, second_weapon_stat)
     diff_value = first_weapon_stat - second_weapon_stat
 

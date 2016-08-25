@@ -29,6 +29,20 @@
             <td><blockquote><%= @secondary['itemDescription'] %></blockquote></td>
             <td></td>
           </tr>
+          <tr>
+            <td>Tipos de dano</td>
+            <td>
+              <% @primary['damageTypes'].each do |damage| %>
+                <%= damage_type(@damage_types[damage]) %>
+              <% end %>
+            </td>
+            <td>
+              <% @secondary['damageTypes'].each do |damage| %>
+                <%= damage_type(@damage_types[damage]) %>
+              <% end %>
+            </td>
+            <td></td>
+          </tr>
           <tr class="section-name">
             <td colspan="4">Estatísticas base</td>
           </tr>
@@ -100,6 +114,23 @@
             <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @primary['stats'][@zoom]['value'] %>%;"><%= @primary['stats'][@zoom]['value'] %></div></div></td>
             <td><div class="progress"><div class="progress-bar" role="progressbar" style="width: <%= @secondary['stats'][@zoom]['value'] %>%;"><%= @secondary['stats'][@zoom]['value'] %></div></div></td>
             <td><%= stats_diff(@primary['stats'][@zoom]['value'], @secondary['stats'][@zoom]['value']) %></td>
+          </tr>
+          <tr class="section-name">
+            <td colspan="4">Outras informações</td>
+          </tr>
+          <tr>
+            <td>Onde obter?</td>
+            <td>
+              <% @primary['sourceHashes'].each do |source| %>
+                <%= source_type(@source_types[source]) %>
+              <% end %>
+            </td>
+            <td>
+              <% @secondary['sourceHashes'].each do |source| %>
+                <%= source_type(@source_types[source]) %>
+              <% end %>
+            </td>
+            <td></td>
           </tr>
         </tbody>
       </table>

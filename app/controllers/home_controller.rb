@@ -1,8 +1,13 @@
 class HomeController < ApplicationController
 
   def index
+    # Get parameters
     primary_weapon = params[:primary]
     secondary_weapon = params[:secondary]
+
+    # Definitions
+    @damage_types = {}
+    @source_types = {}
 
     # Get weapons data and stats
     @primary = parse_weapon_stats(get_weapon_stats(primary_weapon))
@@ -48,6 +53,26 @@ class HomeController < ApplicationController
 
   def parse_weapon_stats(raw_data)
     item_hash = raw_data['Response']['data']['itemHashes'].last.to_s
+
+    # Populate damage types (kinetic, solar, arc or void)
+    raw_data['Response']['definitions']['damageTypes'].each do |damage|
+      damage_enum_value = damage[1]['enumValue']
+      @damage_types[damage_enum_value] = {
+        :damageTypeName => damage[1]['damageTypeName'],
+        :damageIconPath => damage[1]['iconPath']
+      }
+    end
+
+    # Populate sources
+    raw_data['Response']['definitions']['sources'].each do |source|
+      source_hash = source[1]['sourceHash']
+      @source_types[source_hash] = {
+        :sourceName => source[1]['sourceName'],
+        :sourceDesc => source[1]['description'],
+        :sourceIcon => source[1]['icon']
+      }
+    end
+
     return raw_data['Response']['definitions']['items'][item_hash]
   end
 end
