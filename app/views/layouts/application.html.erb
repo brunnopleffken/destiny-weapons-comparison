@@ -6,7 +6,7 @@
     <meta name="author" content="Brunno Pleffken Hosti">
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato' %>
+    <%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Lato:400,700' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
@@ -15,7 +15,7 @@
 
     <nav class="navbar navbar-default">
       <div class="container-fluid">
-        <div class="navbar-header">
+        <div class="navbar-header hidden-xs">
           <a href="/" class="navbar-brand">Destiny Weapons Comparison</a>
         </div>
         <div class="navbar-form navbar-left">
@@ -29,12 +29,13 @@
             </div>
           </form>
         </div>
-        <div class="nav navbar-nav navbar-right">
+        <div class="nav navbar-nav navbar-right hidden-xs hidden-sm">
           <p class="navbar-text">Sempre compare armas da mesma classe (ex: escopeta com outra escopeta)</p>
         </div>
       </div>
     </nav>
 
     <%= yield %>
+
   </body>
 </html>
