@@ -2,16 +2,16 @@ class HomeController < ApplicationController
 
   def index
     # Get parameters
-    primary_weapon = params[:primary]
-    secondary_weapon = params[:secondary]
+    @primary_weapon = params[:primary]
+    @secondary_weapon = params[:secondary]
 
     # Definitions
     @damage_types = {}
     @source_types = {}
 
     # Get weapons data and stats
-    @primary = parse_weapon_stats(get_weapon_stats(primary_weapon))
-    @secondary = parse_weapon_stats(get_weapon_stats(secondary_weapon))
+    @primary = parse_weapon_stats(get_weapon_stats(@primary_weapon))
+    @secondary = parse_weapon_stats(get_weapon_stats(@secondary_weapon))
 
     # Dictionary
     @attack = '368428387'
