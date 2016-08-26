@@ -4,32 +4,31 @@
   <div class="row">
     <div class="col-xs-12">
       <table class="table">
-        <thead class="hidden-xs">
+        <thead>
           <tr>
-            <th class="col-xs-4 col-sm-2">&nbsp;</th>
-            <th class="col-sm-4 primary tier-<%= @primary['tierType'] %>">
+            <th class="col-xs-3 col-sm-2">&nbsp;</th>
+            <th class="col-sm-4 hidden-xs primary tier-<%= @primary['tierType'] %>">
               <img src="https://www.bungie.net/<%= @primary['icon'] %>">
               <h1><%= @primary['itemName'] %></h1>
               <h2><%= @primary['itemTypeName'] %></h2>
               <span class="tier"><%= @primary['tierTypeName'] %></span>
             </th>
-            <th class="col-sm-4 secondary tier-<%= @secondary['tierType'] %>">
+            <th class="col-sm-4 hidden-xs secondary tier-<%= @secondary['tierType'] %>">
               <img src="https://www.bungie.net/<%= @secondary['icon'] %>">
               <h1><%= @secondary['itemName'] %></h1>
               <h2><%= @secondary['itemTypeName'] %></h2>
               <span class="tier"><%= @secondary['tierTypeName'] %></span>
             </th>
-            <th class="col-xs-8 col-sm-2">&nbsp;</th>
+            <th class="col-xs-9 col-sm-2">&nbsp;</th>
           </tr>
         </thead>
 
         <tbody>
           <tr class="mobile-header visible-xs">
-            <td>&nbsp;</td>
-            <td class="text-center">
-              <img src="https://www.bungie.net/<%= @primary['icon'] %>" class="pull-left">
-              <span>x</span>
-              <img src="https://www.bungie.net/<%= @secondary['icon'] %>" class="pull-right">
+            <td colspan="2">
+              <img src="https://www.bungie.net/<%= @primary['icon'] %>">
+              <span>&times;</span>
+              <img src="https://www.bungie.net/<%= @secondary['icon'] %>">
             </td>
           </tr>
           <tr class="hidden-xs">
@@ -413,6 +412,16 @@
 
         </tbody>
       </table>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-info visible-xs">
+        <strong>Versão mobile!</strong> Você está limitado à tela do celular, portanto visualiza somente o gráfico comparativo. Para visualizar estatísticas completas de cada uma das armas, valores mínimos e  máximos, inclusive onde obtê-las, acesse em um tablet ou notebook. :)
+      </div>
     </div>
   </div>
 </div>

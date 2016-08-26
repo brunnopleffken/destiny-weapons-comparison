@@ -136,14 +136,18 @@ form {
     tr {
       &.mobile-header {
         td {
+          text-align: center !important;
           img {
             border: 2px solid #fff;
-            height: 70px;
-            width: 70px;
+            display: inline-block;
+            height: 90px;
+            width: 90px;
           }
           span {
+            display: inline-block;
             font-size: 30px;
-            line-height: 70px;
+            line-height: 94px;
+            width: 1.5em;
           }
         }
       }
