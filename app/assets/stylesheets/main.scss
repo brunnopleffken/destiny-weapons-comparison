@@ -134,6 +134,19 @@ form {
   }
   tbody {
     tr {
+      &.mobile-header {
+        td {
+          img {
+            border: 2px solid #fff;
+            height: 70px;
+            width: 70px;
+          }
+          span {
+            font-size: 30px;
+            line-height: 70px;
+          }
+        }
+      }
       td {
         background-color: rgba(0, 0, 0, 0.7);
         border-top: 0;

@@ -4,33 +4,41 @@
   <div class="row">
     <div class="col-xs-12">
       <table class="table">
-        <thead>
+        <thead class="hidden-xs">
           <tr>
-            <th class="col-xs-2">&nbsp;</th>
-            <th class="col-xs-4 primary tier-<%= @primary['tierType'] %>">
+            <th class="col-xs-4 col-sm-2">&nbsp;</th>
+            <th class="col-sm-4 primary tier-<%= @primary['tierType'] %>">
               <img src="https://www.bungie.net/<%= @primary['icon'] %>">
               <h1><%= @primary['itemName'] %></h1>
               <h2><%= @primary['itemTypeName'] %></h2>
               <span class="tier"><%= @primary['tierTypeName'] %></span>
             </th>
-            <th class="col-xs-4 secondary tier-<%= @secondary['tierType'] %>">
+            <th class="col-sm-4 secondary tier-<%= @secondary['tierType'] %>">
               <img src="https://www.bungie.net/<%= @secondary['icon'] %>">
               <h1><%= @secondary['itemName'] %></h1>
               <h2><%= @secondary['itemTypeName'] %></h2>
               <span class="tier"><%= @secondary['tierTypeName'] %></span>
             </th>
-            <th class="col-xs-2">&nbsp;</th>
+            <th class="col-xs-8 col-sm-2">&nbsp;</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
+          <tr class="mobile-header visible-xs">
+            <td>&nbsp;</td>
+            <td class="text-center">
+              <img src="https://www.bungie.net/<%= @primary['icon'] %>" class="pull-left">
+              <span>x</span>
+              <img src="https://www.bungie.net/<%= @secondary['icon'] %>" class="pull-right">
+            </td>
+          </tr>
+          <tr class="hidden-xs">
             <td>&nbsp;</td>
             <td><blockquote><%= @primary['itemDescription'] %></blockquote></td>
             <td><blockquote><%= @secondary['itemDescription'] %></blockquote></td>
             <td>&nbsp;</td>
           </tr>
-          <tr>
+          <tr class="hidden-xs">
             <td>&nbsp;</td>
             <td>
               <% @primary['damageTypes'].each do |damage| %>
@@ -49,12 +57,12 @@
           </tr>
           <tr>
             <td>&nbsp;</td>
-            <td class="attack">
+            <td class="attack hidden-xs">
               <span><%= @primary['stats'][@attack]['minimum'] %><!--
               --><small>/<%= @primary['stats'][@attack]['maximum'] %></small>
               </span>
             </td>
-            <td class="attack">
+            <td class="attack hidden-xs">
               <span><%= @secondary['stats'][@attack]['minimum'] %><!--
               --><small>/<%= @secondary['stats'][@attack]['maximum'] %></small>
               </span>
@@ -64,7 +72,7 @@
 
           <tr>
             <td>Cadência</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -78,7 +86,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -97,7 +105,7 @@
 
           <tr>
             <td>Impacto</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -111,7 +119,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -130,7 +138,7 @@
 
           <tr>
             <td>Alcance</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -144,7 +152,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -163,7 +171,7 @@
 
           <tr>
             <td>Estabilidade</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -177,7 +185,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -196,7 +204,7 @@
 
           <tr>
             <td>Recarga</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -210,7 +218,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -229,7 +237,7 @@
 
           <tr>
             <td>Carregador</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9"><%= @primary['stats'][@magazine]['value'] %></div>
                 <div class="col-xs-3">
@@ -237,7 +245,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9"><%= @secondary['stats'][@magazine]['value'] %></div>
                 <div class="col-xs-3">
@@ -254,7 +262,7 @@
 
           <tr>
             <td>Assistência de mira</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -268,7 +276,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -287,7 +295,7 @@
 
           <tr>
             <td>Manuseio</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -301,7 +309,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -320,7 +328,7 @@
 
           <tr>
             <td>Direção de recuo</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -334,7 +342,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -353,7 +361,7 @@
 
           <tr>
             <td>Zoom</td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -367,7 +375,7 @@
                 </div>
               </div>
             </td>
-            <td>
+            <td class="hidden-xs">
               <div class="row">
                 <div class="col-xs-9">
                   <div class="progress">
@@ -384,11 +392,11 @@
             <td><%= stats_diff(@primary['stats'][@zoom]['value'], @secondary['stats'][@zoom]['value']) %></td>
           </tr>
 
-          <tr class="section-name">
+          <tr class="section-name hidden-xs">
             <td colspan="4">Onde obter esta arma?</td>
           </tr>
 
-          <tr>
+          <tr class="hidden-xs">
             <td>&nbsp;</td>
             <td>
               <% @primary['sourceHashes'].each do |source| %>
