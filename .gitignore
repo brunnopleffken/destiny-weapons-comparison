@@ -16,5 +16,6 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-# Custom
-/app/assets/bower_components
+# Destiny Weapons Comparison files
+/config/initializers/destiny_api.rb
+/app/assets/bower_components/*/src

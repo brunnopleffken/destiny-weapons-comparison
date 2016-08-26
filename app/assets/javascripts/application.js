@@ -1,7 +1,6 @@
-//= require jquery/dist/jquery.min
-//= require bootstrap/dist/js/bootstrap.min
-// require jquery_ujs
-// require_tree .
+//= require jquery.min
+//= require bootstrap.min
+//= require_tree .
 
 
 $(document).ready(function() {
