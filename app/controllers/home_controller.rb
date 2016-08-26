@@ -22,8 +22,8 @@ class HomeController < ApplicationController
     end
 
     # Get weapons data and stats
-    @primary = parse_weapon_stats(get_weapon_stats(@primary_weapon, primary_order))
-    @secondary = parse_weapon_stats(get_weapon_stats(@secondary_weapon, secondary_order))
+    @primary = parse_weapon_stats(get_weapon_stats(@primary_weapon, primary_order), 'primary')
+    @secondary = parse_weapon_stats(get_weapon_stats(@secondary_weapon, secondary_order), 'secondary')
 
     # Dictionary
     @attack = '368428387'
@@ -69,12 +69,23 @@ class HomeController < ApplicationController
     return JSON.parse(response.body)
   end
 
-  def parse_weapon_stats(raw_data)
-    item_hash = raw_data['Response']['data']['itemHashes'].last.to_s
-    
+  def parse_weapon_stats(raw_data, type)
+
+    if raw_data['Response']['data']['itemHashes'].empty?
+      # Throw error if no items were found
+      @keyword = if type == 'primary' then @primary_weapon else @secondary_weapon end
+      render :is_empty_error
+      return
+    else
+      # Save item hash
+      item_hash = raw_data['Response']['data']['itemHashes'].last.to_s
+    end
+
+    # Throw error if an item was found, but it is an armor
     if raw_data['Response']['definitions']['items'][item_hash]['itemType'] == 2
       @found_item_name = raw_data['Response']['definitions']['items'][item_hash]['itemName']
       render :is_armor_error
+      return
     end
 
     # Populate damage types (kinetic, solar, arc or void)
