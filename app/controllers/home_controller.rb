@@ -70,7 +70,7 @@ class HomeController < ApplicationController
   end
 
   def parse_weapon_stats(raw_data, type)
-
+    # Check if hash is empty
     if raw_data['Response']['data']['itemHashes'].empty?
       # Throw error if no items were found
       @keyword = if type == 'primary' then @primary_weapon else @secondary_weapon end
