@@ -3,12 +3,14 @@ class HomeController < ApplicationController
   def index
     @title = 'Destiny Weapons Comparison'
     @description = 'Compare Destiny weapons stats! Rate of fire, range, stability, but also compare useful hidden stats like aim assistance and recoil.'
+    @language = 'en'
   end
 
   def compare
     # Get parameters
     @first = params[:first_weapon]
     @second = params[:second_weapon]
+    @language = params[:lang]
 
     @weapon_comparison = {}
 
@@ -50,7 +52,7 @@ class HomeController < ApplicationController
     source = URI('https://www.bungie.net/Platform/Destiny/Explorer/Items/')
     parameters = {
       :definitions => true,
-      :lc => 'pt-br',
+      :lc => @language,
       :name => weapon_name,
       :order => 'MaximumRequiredLevel',
       :direction => direction
