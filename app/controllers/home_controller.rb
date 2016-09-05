@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 
   def index
     @title = 'Destiny Weapons Comparison'
+    @description = 'Compare Destiny weapons stats! Rate of fire, range, stability, but also compare useful hidden stats like aim assistance and recoil.'
   end
 
   def compare
@@ -26,7 +27,8 @@ class HomeController < ApplicationController
     parse_weapon_stats(raw_first_weapon_stats['Response'], 'first')
     parse_weapon_stats(raw_second_weapon_stats['Response'], 'second')
 
-    @title = "Destiny Weapons Comparison | #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
+    @title = "DWC | #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
+    @description = "Destiny Weapons Comparison - #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
   end
 
   private
