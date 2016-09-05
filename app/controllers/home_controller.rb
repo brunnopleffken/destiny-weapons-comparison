@@ -115,7 +115,7 @@ class HomeController < ApplicationController
         :statName => raw_data['definitions']['stats'][stat[0]]['statName'],
         :statDescription => raw_data['definitions']['stats'][stat[0]]['statDescription'],
         :value => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['value'],
-        :minumum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['minimum'],
+        :minimum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['minimum'],
         :maximum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['maximum']
       }
     end

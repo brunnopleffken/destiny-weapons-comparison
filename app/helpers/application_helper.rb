@@ -13,7 +13,7 @@ module ApplicationHelper
             </div>
           </div>
           <div class='col-xs-3'>
-            <small>#{data['first']['stats'][stat_name][:minumum]}/#{data['first']['stats'][stat_name][:maximum]}</small>
+            <small>#{data['first']['stats'][stat_name][:minimum]}/#{data['first']['stats'][stat_name][:maximum]}</small>
           </div>
         </div>
       </td>
@@ -27,7 +27,7 @@ module ApplicationHelper
             </div>
           </div>
           <div class='col-xs-3'>
-            <small>#{data['second']['stats'][stat_name][:minumum]}/#{data['second']['stats'][stat_name][:maximum]}</small>
+            <small>#{data['second']['stats'][stat_name][:minimum]}/#{data['second']['stats'][stat_name][:maximum]}</small>
           </div>
         </div>
       </td>
