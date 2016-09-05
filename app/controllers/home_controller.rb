@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def index
-    #
+    @title = 'Destiny Weapons Comparison'
   end
 
   def compare
