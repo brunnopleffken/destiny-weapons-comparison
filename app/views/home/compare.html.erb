@@ -1,6 +1,17 @@
 <%= render 'shared/search' %>
 
 <div class="container">
+
+  <% if @weapon_comparison['first']['itemTypeName'] != @weapon_comparison['second']['itemTypeName'] %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="alert alert-warning">
+          <strong><%= @weapon_comparison['first']['itemTypeName'] %></strong> vs. <strong><%= @weapon_comparison['second']['itemTypeName'] %></strong>?
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="col-xs-12">
       <table class="table">
