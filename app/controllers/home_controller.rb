@@ -13,16 +13,25 @@ class HomeController < ApplicationController
     @weapon_comparison = {}
 
     # Check if user is trying to compare Y1 with Y2 weapon
-    if @primary_weapon == @secondary_weapon
-      first_w_order = 'Descending'
-      second_w_order = 'Ascending'
+    if @first == @second
+      first_weapon_direction = 'Ascending'
+      second_weapon_direction = 'Descending'
     else
-      first_w_order = second_w_order = 'Ascending'
+      first_weapon_direction = second_weapon_direction = 'Descending'
     end
 
     # Get weapons data and stats
-    raw_first_weapon_stats = get_from_api(@first, first_w_order)
-    raw_second_weapon_stats = get_from_api(@second, second_w_order)
+    raw_first_weapon_stats = get_from_api(@first, first_weapon_direction)
+    raw_second_weapon_stats = get_from_api(@second, second_weapon_direction)
+
+    # Checks if the search doesn't return empty
+    if raw_first_weapon_stats['Response']['data']['itemHashes'].empty?
+      @keyword = @first
+      render :is_empty_error and return
+    elsif raw_second_weapon_stats['Response']['data']['itemHashes'].empty?
+      @keyword = @second
+      render :is_empty_error and return
+    end
 
     parse_weapon_stats(raw_first_weapon_stats['Response'], 'first')
     parse_weapon_stats(raw_second_weapon_stats['Response'], 'second')
@@ -63,9 +72,10 @@ class HomeController < ApplicationController
   # ------------------
 
   def parse_weapon_stats(raw_data, order)
-
     @weapon_comparison[order] = {}
-    item_hash = raw_data['data']['itemHashes'].last.to_s
+    item_hash = raw_data['data']['itemHashes'].first.to_s
+
+    validate_results(raw_data, item_hash)
 
     # Dictionary
     attack = '368428387'
@@ -131,6 +141,16 @@ class HomeController < ApplicationController
         :damageTypeName => damage[1]['damageTypeName'],
         :damageIconPath => damage[1]['iconPath']
       }
+    end
+  end
+
+  # ------------------
+
+  def validate_results(raw_data, item_hash)
+    if raw_data['definitions']['items'][item_hash]['itemType'] != 3
+      @found_item_name = raw_data['definitions']['items'][item_hash]['itemName']
+      @found_item_type = raw_data['definitions']['items'][item_hash]['itemTypeName']
+      render :is_armor_error and return
     end
   end
 
