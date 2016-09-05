@@ -4,6 +4,7 @@ body {
   background-position: top;
   background-size: cover;
   color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 .navbar {
@@ -235,11 +236,14 @@ form {
   }
   .text {
     .title {
+      color: #bbb;
       display: block;
+      font-size: 14px;
       font-weight: bold;
       text-transform: uppercase;
     }
     .desc {
+      color: #bbb;
       font-family: 'Lato', sans-serif;
       font-size: 12px;
       font-style: italic;
