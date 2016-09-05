@@ -2,7 +2,11 @@ module ApplicationHelper
 
   def render_stat_row(data, stat_name)
     html = "<tr>
-      <td>#{data['first']['stats'][stat_name][:statName]}</td>
+      <td>
+        <span data-toggle='tooltip' data-placement='right' title='#{data['first']['stats'][stat_name][:statDescription]}'>
+          #{data['first']['stats'][stat_name][:statName]}
+        </span>
+      </td>
       <td class='hidden-xs'>
         <div class='row'>
           <div class='col-xs-9'>
