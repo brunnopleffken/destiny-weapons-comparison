@@ -2,13 +2,13 @@
   <form action="/" id="search-form">
     <div class="row">
       <div class="col-sm-5 col-md-3 col-md-offset-2">
-        <input type="text" class="form-control" id="primary-weapon" name="primary-weapon" placeholder="Ex: Encarada de 1000 Jardas" value="<%= @primary['itemName'] %>" required>
+        <input type="text" class="form-control" id="primary-weapon" name="primary-weapon" placeholder="Ex: Encarada de 1000 Jardas" value="<%= @weapon_comparison['first']['itemName'] %>" required>
       </div>
       <div class="col-sm-1 text-center">
         <p class="form-control-static">X</p>
       </div>
       <div class="col-sm-5 col-md-3">
-        <input type="text" class="form-control" id="secondary-weapon" name="secondary-weapon" placeholder="Ex: Irene RR4" value="<%= @secondary['itemName'] %>" required>
+        <input type="text" class="form-control" id="secondary-weapon" name="secondary-weapon" placeholder="Ex: Irene RR4" value="<%= @weapon_comparison['second']['itemName'] %>" required>
       </div>
       <div class="col-sm-1">
         <button type="submit" class="btn btn-default btn-block">&raquo;</button>

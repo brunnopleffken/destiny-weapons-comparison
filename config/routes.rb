@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/:primary/:secondary', to: 'home#compare'
+  get '/:first_weapon/:second_weapon', to: 'home#compare'
   root to: 'home#index'
 
 end

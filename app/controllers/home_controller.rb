@@ -6,43 +6,32 @@ class HomeController < ApplicationController
 
   def compare
     # Get parameters
-    @primary_weapon = params[:primary]
-    @secondary_weapon = params[:secondary]
+    @first = params[:first_weapon]
+    @second = params[:second_weapon]
 
-    # Definitions
-    @damage_types = {}
-    @source_types = {}
+    @weapon_comparison = {}
 
     # Check if user is trying to compare Y1 with Y2 weapon
     if @primary_weapon == @secondary_weapon
-      primary_order = 'Descending'
-      secondary_order = 'Ascending'
+      first_w_order = 'Descending'
+      second_w_order = 'Ascending'
     else
-      primary_order = secondary_order = 'Ascending'
+      first_w_order = second_w_order = 'Ascending'
     end
 
     # Get weapons data and stats
-    @primary = parse_weapon_stats(get_weapon_stats(@primary_weapon, primary_order), 'primary')
-    @secondary = parse_weapon_stats(get_weapon_stats(@secondary_weapon, secondary_order), 'secondary')
+    raw_first_weapon_stats = get_from_api(@first, first_w_order)
+    raw_second_weapon_stats = get_from_api(@second, second_w_order)
 
-    # Dictionary
-    @attack = '368428387'
-    @light_level = '2391494160'
-    @rate_of_fire = '4284893193'
-    @impact = '4043523819'
-    @range = '1240592695'
-    @stability = '155624089'
-    @reload = '4188031367'
-    @magazine = '3871231066'
-    @aim_assist = '1345609583'
-    @equip_speed = '943549884'
-    @recoil = '2715839340'
-    @zoom = '3555269338'
+    parse_weapon_stats(raw_first_weapon_stats['Response'], 'first')
+    parse_weapon_stats(raw_second_weapon_stats['Response'], 'second')
+
+    @title = "Destiny Weapons Comparison | #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
   end
 
   private
 
-  def get_weapon_stats(weapon_name, direction)
+  def get_from_api(weapon_name, direction)
     # Check if API key is defined in config/initializers
     raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
 
@@ -69,44 +58,78 @@ class HomeController < ApplicationController
     return JSON.parse(response.body)
   end
 
-  def parse_weapon_stats(raw_data, type)
-    # Check if hash is empty
-    if raw_data['Response']['data']['itemHashes'].empty?
-      # Throw error if no items were found
-      @keyword = if type == 'primary' then @primary_weapon else @secondary_weapon end
-      render :is_empty_error
-      return
-    else
-      # Save item hash
-      item_hash = raw_data['Response']['data']['itemHashes'].last.to_s
+  # ------------------
+
+  def parse_weapon_stats(raw_data, order)
+
+    @weapon_comparison[order] = {}
+    item_hash = raw_data['data']['itemHashes'].last.to_s
+
+    # Dictionary
+    attack = '368428387'
+    light_level = '2391494160'
+    rate_of_fire = '4284893193'
+    charge = '2961396640'
+    impact = '4043523819'
+    blast_radius = '3614673599'
+    range = '1240592695'
+    velocity = '2523465841'
+    stability = '155624089'
+    reload = '4188031367'
+    magazine = '3871231066'
+    aim_assist = '1345609583'
+    equip_speed = '943549884'
+    recoil = '2715839340'
+    zoom = '3555269338'
+
+    @weapon_comparison[order]['itemName'] = raw_data['definitions']['items'][item_hash]['itemName']
+    @weapon_comparison[order]['itemDescription'] = raw_data['definitions']['items'][item_hash]['itemDescription']
+    @weapon_comparison[order]['icon'] = raw_data['definitions']['items'][item_hash]['icon']
+    @weapon_comparison[order]['tierType'] = raw_data['definitions']['items'][item_hash]['tierType']
+    @weapon_comparison[order]['tierTypeName'] = raw_data['definitions']['items'][item_hash]['tierTypeName']
+    @weapon_comparison[order]['itemTypeName'] = raw_data['definitions']['items'][item_hash]['itemTypeName']
+    @weapon_comparison[order]['damageTypes'] = []
+    @weapon_comparison[order]['sources'] = []
+
+    # Define stats order
+    @weapon_comparison[order]['stats'] = {}
+
+    raw_data['definitions']['items'][item_hash]['stats'].each do |stat|
+      case stat[0]
+        when attack then stat_type = 'attack'
+        when light_level then stat_type = 'light_level'
+        when rate_of_fire, charge then stat_type = 'rate_of_fire'
+        when impact, blast_radius then stat_type = 'impact'
+        when range, velocity then stat_type = 'range'
+        when stability then stat_type = 'stability'
+        when magazine then stat_type = 'magazine'
+        when reload then stat_type = 'reload'
+        when rate_of_fire then stat_type = 'rate_of_fire'
+        when aim_assist then stat_type = 'aim_assist'
+        when equip_speed then stat_type = 'equip_speed'
+        when recoil then stat_type = 'recoil'
+        when zoom then stat_type = 'zoom'
+      end
+
+      @weapon_comparison[order]['stats'][stat_type] = {
+        :statName => raw_data['definitions']['stats'][stat[0]]['statName'],
+        :statDescription => raw_data['definitions']['stats'][stat[0]]['statDescription'],
+        :value => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['value'],
+        :minumum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['minimum'],
+        :maximum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['maximum']
+      }
     end
 
-    # Throw error if an item was found, but it is an armor
-    if raw_data['Response']['definitions']['items'][item_hash]['itemType'] == 2
-      @found_item_name = raw_data['Response']['definitions']['items'][item_hash]['itemName']
-      render :is_armor_error
-      return
+    raw_data['definitions']['sources'].each do |source|
+      @weapon_comparison[order]['sources'] << source[1]
     end
 
-    # Populate damage types (kinetic, solar, arc or void)
-    raw_data['Response']['definitions']['damageTypes'].each do |damage|
-      damage_enum_value = damage[1]['enumValue']
-      @damage_types[damage_enum_value] = {
+    raw_data['definitions']['damageTypes'].each do |damage|
+      @weapon_comparison[order]['damageTypes'] << {
         :damageTypeName => damage[1]['damageTypeName'],
         :damageIconPath => damage[1]['iconPath']
       }
     end
-
-    # Populate sources
-    raw_data['Response']['definitions']['sources'].each do |source|
-      source_hash = source[1]['sourceHash']
-      @source_types[source_hash] = {
-        :sourceName => source[1]['sourceName'],
-        :sourceDesc => source[1]['description'],
-        :sourceIcon => source[1]['icon']
-      }
-    end
-
-    return raw_data['Response']['definitions']['items'][item_hash]
   end
+
 end

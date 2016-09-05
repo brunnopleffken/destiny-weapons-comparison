@@ -1,5 +1,42 @@
 module ApplicationHelper
 
+  def render_stat_row(data, stat_name)
+    html = "<tr>
+      <td>#{data['first']['stats'][stat_name][:statName]}</td>
+      <td class='hidden-xs'>
+        <div class='row'>
+          <div class='col-xs-9'>
+            <div class='progress'>
+              <div class='progress-bar' style='width: #{data['first']['stats'][stat_name][:value]}%;'>
+                #{data['first']['stats'][stat_name][:value]}
+              </div>
+            </div>
+          </div>
+          <div class='col-xs-3'>
+            <small>#{data['first']['stats'][stat_name][:minumum]}/#{data['first']['stats'][stat_name][:maximum]}</small>
+          </div>
+        </div>
+      </td>
+      <td class='hidden-xs'>
+        <div class='row'>
+          <div class='col-xs-9'>
+            <div class='progress'>
+              <div class='progress-bar' style='width: #{data['second']['stats'][stat_name][:value]}%;'>
+                #{data['second']['stats'][stat_name][:value]}
+              </div>
+            </div>
+          </div>
+          <div class='col-xs-3'>
+            <small>#{data['second']['stats'][stat_name][:minumum]}/#{data['second']['stats'][stat_name][:maximum]}</small>
+          </div>
+        </div>
+      </td>
+      <td>#{stats_diff(data['first']['stats'][stat_name][:value], data['second']['stats'][stat_name][:value])}</td>
+    </tr>"
+
+    return html.html_safe
+  end
+
   # Return an IMG tag with the icon of the damage type
   #
   def damage_type(damage)
@@ -10,10 +47,7 @@ module ApplicationHelper
   # Return a DIV with image and text with the source of the weapon
   #
   def source_type(source)
-    html = ""
-    unless source.nil?
-      html = "<div class='source'><img src='https://www.bungie.net/#{source[:sourceIcon]}' title='#{source[:sourceName]}' class='image'><div class='text'><span class='title'>#{source[:sourceName]}</span><span class='desc'>#{source[:sourceDesc]}</span></div></div>"
-    end
+    html = "<div class='source'><img src='https://www.bungie.net/#{source['icon']}' title='#{source['sourceName']}' class='image'><div class='text'><span class='title'>#{source['sourceName']}</span><span class='desc'>#{source['description']}</span></div></div>"
     return html.html_safe
   end
 
