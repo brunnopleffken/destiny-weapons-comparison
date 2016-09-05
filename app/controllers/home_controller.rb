@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     # Get parameters
     @first = params[:first_weapon]
     @second = params[:second_weapon]
-    @language = params[:lang]
+    @language = params[:lang] || 'en'
 
     @weapon_comparison = {}
 

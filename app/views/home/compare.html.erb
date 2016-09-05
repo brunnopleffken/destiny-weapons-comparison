@@ -62,9 +62,11 @@
             </td>
             <td>&nbsp;</td>
           </tr>
+
           <tr class="section-name">
-            <td colspan="4">Estatísticas base</td>
+            <td colspan="4"><%= t(:base_stats) %></td>
           </tr>
+
           <tr>
             <td>&nbsp;</td>
             <td class="attack hidden-xs">
@@ -88,7 +90,7 @@
           <%= render_stat_row(@weapon_comparison, 'reload') %>
 
           <tr class="section-name">
-            <td colspan="4">Estatísticas ocultas</td>
+            <td colspan="4"><%= t(:hidden_stats) %></td>
           </tr>
 
           <%= render_stat_row(@weapon_comparison, 'aim_assist') %>
@@ -97,7 +99,7 @@
           <%= render_stat_row(@weapon_comparison, 'zoom') %>
 
           <tr class="section-name hidden-xs">
-            <td colspan="4">Onde obter esta arma?</td>
+            <td colspan="4"><%= t(:where_to_get) %></td>
           </tr>
 
           <tr>
