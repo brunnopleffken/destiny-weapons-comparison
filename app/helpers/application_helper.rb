@@ -41,6 +41,35 @@ module ApplicationHelper
     return html.html_safe
   end
 
+  def render_magazine_row(data)
+    html = "<tr>
+      <td>
+        <span data-toggle='tooltip' data-placement='right' title='#{data['first']['stats']['magazine'][:statDescription]}'>
+          #{data['first']['stats']['magazine'][:statName]}
+        </span>
+      </td>
+      <td class='hidden-xs'>
+        <div class='row'>
+          <div class='col-xs-9'>#{data['first']['stats']['magazine'][:value]}</div>
+          <div class='col-xs-3'>
+            #{data['first']['stats']['magazine'][:minimum]}/#{data['first']['stats']['magazine'][:maximum]}
+          </div>
+        </div>
+      </td>
+      <td class='hidden-xs'>
+        <div class='row'>
+          <div class='col-xs-9'>#{data['second']['stats']['magazine'][:value]}</div>
+          <div class='col-xs-3'>
+            #{data['second']['stats']['magazine'][:minimum]}/#{data['second']['stats']['magazine'][:maximum]}
+          </div>
+        </div>
+      </td>
+      <td>#{magazine_diff(data['first']['stats']['magazine'][:value], data['second']['stats']['magazine'][:value])}</td>
+    </tr>"
+
+    return html.html_safe
+  end
+
   # Return an IMG tag with the icon of the damage type
   #
   def damage_type(damage)
