@@ -60,7 +60,7 @@ module ApplicationHelper
         <div class='row'>
           <div class='col-xs-9'>#{data['second']['stats']['magazine'][:value]}</div>
           <div class='col-xs-3'>
-            #{data['second']['stats']['magazine'][:minimum]}/#{data['second']['stats']['magazine'][:maximum]}
+            <small>#{data['second']['stats']['magazine'][:minimum]}/#{data['second']['stats']['magazine'][:maximum]}</small>
           </div>
         </div>
       </td>
