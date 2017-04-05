@@ -97,11 +97,11 @@ form {
         border-bottom: 0;
         vertical-align: top;
         &.primary, &.secondary { position: relative;}
-        &.tier-1, &.tier-2 { background: rgba(245,245,245,.9); color: #1e242b !important; }
-        &.tier-3 { background: rgba(47,107,60,.9); }
-        &.tier-4 { background: rgba(85,127,158,.9); }
-        &.tier-5 { background: rgba(78,50,99,.9); }
-        &.tier-6 { background: rgba(206,174,50,.9); }
+        &.tier-1, &.tier-2 { background: rgba(245,245,245,1); color: #1e242b !important; }
+        &.tier-3 { background: rgba(47,107,60,1); }
+        &.tier-4 { background: rgba(85,127,158,1); }
+        &.tier-5 { background: rgba(78,50,99,1); }
+        &.tier-6 { background: rgba(206,174,50,1); }
         img {
           border: 2px solid #fff;
           float: left;
