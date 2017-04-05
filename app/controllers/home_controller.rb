@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  require 'net/http'
 
   def index
     @title = 'Destiny Weapons Comparison'
@@ -14,23 +15,15 @@ class HomeController < ApplicationController
 
     @weapon_comparison = {}
 
-    # Check if user is trying to compare Y1 with Y2 weapon
-    if @first == @second
-      first_weapon_direction = 'Ascending'
-      second_weapon_direction = 'Descending'
-    else
-      first_weapon_direction = second_weapon_direction = 'Descending'
-    end
-
     # Get weapons data and stats
-    raw_first_weapon_stats = get_from_api(@first, first_weapon_direction)
-    raw_second_weapon_stats = get_from_api(@second, second_weapon_direction)
+    raw_first_weapon_stats = get_from_api(@first)
+    raw_second_weapon_stats = get_from_api(@second)
 
     # Checks if the search doesn't return empty
-    if raw_first_weapon_stats['Response']['data']['itemHashes'].empty?
+    if raw_first_weapon_stats['Response']['data'].empty?
       @keyword = @first
       render :is_empty_error and return
-    elsif raw_second_weapon_stats['Response']['data']['itemHashes'].empty?
+    elsif raw_second_weapon_stats['Response']['data'].empty?
       @keyword = @second
       render :is_empty_error and return
     end
@@ -44,18 +37,15 @@ class HomeController < ApplicationController
 
   private
 
-  def get_from_api(weapon_name, direction)
+  def get_from_api(hash_id)
     # Check if API key is defined in config/initializers
     raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
 
     # Define basic parameters
-    source = URI('https://www.bungie.net/Platform/Destiny/Explorer/Items/')
+    source = URI("https://www.bungie.net/Platform/Destiny/Manifest/6/#{hash_id}/")
     parameters = {
       :definitions => true,
-      :lc => @language,
-      :name => weapon_name,
-      :order => 'MaximumRequiredLevel',
-      :direction => direction
+      :lc => @language
     }
 
     # Create new HTTP request
@@ -75,9 +65,7 @@ class HomeController < ApplicationController
 
   def parse_weapon_stats(raw_data, order)
     @weapon_comparison[order] = {}
-    item_hash = raw_data['data']['itemHashes'].first.to_s
-
-    validate_results(raw_data, item_hash)
+    item_hash = raw_data['data']['inventoryItem']
 
     # Dictionary
     attack = '368428387'
@@ -96,19 +84,19 @@ class HomeController < ApplicationController
     recoil = '2715839340'
     zoom = '3555269338'
 
-    @weapon_comparison[order]['itemName'] = raw_data['definitions']['items'][item_hash]['itemName']
-    @weapon_comparison[order]['itemDescription'] = raw_data['definitions']['items'][item_hash]['itemDescription']
-    @weapon_comparison[order]['icon'] = raw_data['definitions']['items'][item_hash]['icon']
-    @weapon_comparison[order]['tierType'] = raw_data['definitions']['items'][item_hash]['tierType']
-    @weapon_comparison[order]['tierTypeName'] = raw_data['definitions']['items'][item_hash]['tierTypeName']
-    @weapon_comparison[order]['itemTypeName'] = raw_data['definitions']['items'][item_hash]['itemTypeName']
+    @weapon_comparison[order]['itemName'] = raw_data['data']['inventoryItem']['itemName']
+    @weapon_comparison[order]['itemDescription'] = raw_data['data']['inventoryItem']['itemDescription']
+    @weapon_comparison[order]['icon'] = raw_data['data']['inventoryItem']['icon']
+    @weapon_comparison[order]['tierType'] = raw_data['data']['inventoryItem']['tierType']
+    @weapon_comparison[order]['tierTypeName'] = raw_data['data']['inventoryItem']['tierTypeName']
+    @weapon_comparison[order]['itemTypeName'] = raw_data['data']['inventoryItem']['itemTypeName']
     @weapon_comparison[order]['damageTypes'] = []
     @weapon_comparison[order]['sources'] = []
 
     # Define stats order
     @weapon_comparison[order]['stats'] = {}
 
-    raw_data['definitions']['items'][item_hash]['stats'].each do |stat|
+    raw_data['data']['inventoryItem']['stats'].each do |stat|
       case stat[0]
         when attack then stat_type = 'attack'
         when light_level then stat_type = 'light_level'
@@ -128,9 +116,9 @@ class HomeController < ApplicationController
       @weapon_comparison[order]['stats'][stat_type] = {
         :statName => raw_data['definitions']['stats'][stat[0]]['statName'],
         :statDescription => raw_data['definitions']['stats'][stat[0]]['statDescription'],
-        :value => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['value'],
-        :minimum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['minimum'],
-        :maximum => raw_data['definitions']['items'][item_hash]['stats'][stat[0]]['maximum']
+        :value => raw_data['data']['inventoryItem']['stats'][stat[0]]['value'],
+        :minimum => raw_data['data']['inventoryItem']['stats'][stat[0]]['minimum'],
+        :maximum => raw_data['data']['inventoryItem']['stats'][stat[0]]['maximum']
       }
     end
 
@@ -143,16 +131,6 @@ class HomeController < ApplicationController
         :damageTypeName => damage[1]['damageTypeName'],
         :damageIconPath => damage[1]['iconPath']
       }
-    end
-  end
-
-  # ------------------
-
-  def validate_results(raw_data, item_hash)
-    if raw_data['definitions']['items'][item_hash]['itemType'] != 3
-      @found_item_name = raw_data['definitions']['items'][item_hash]['itemName']
-      @found_item_type = raw_data['definitions']['items'][item_hash]['itemTypeName']
-      render :is_armor_error and return
     end
   end
 
