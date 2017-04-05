@@ -26,6 +26,7 @@ $(document).ready(function() {
       data: function(params) {
         return {
           'definitions': true,
+          'lc': $('#language').val(),
           'name': params.term,
           'direction': 'Descending',
           'order': 'MaximumRequiredLevel',
