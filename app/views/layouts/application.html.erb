@@ -22,15 +22,12 @@
         <div class="navbar-header">
           <a href="/" class="navbar-brand">Destiny Weapons Comparison</a>
         </div>
-        <div class="navbar-form navbar-left">
+        <div class="navbar-form navbar-right">
           <form action="/" method="post">
             <div class="form-group">
               Supported languages: <%= select_tag 'language', options_for_select({ 'Deutsch' => 'de', 'English' => 'en', 'Español' => 'es', 'Français' => 'fr', 'Italiano' => 'it', '日本語' => 'jp', 'Português (Brasil)' => 'pt-br' }, @language), class: 'form-control' %>
             </div>
           </form>
-        </div>
-        <div class="nav navbar-nav navbar-right hidden-xs hidden-sm">
-          <p class="navbar-text">Always compare weapons of the same type (e.g. shotgun with another shotgun).</p>
         </div>
       </div>
     </nav>

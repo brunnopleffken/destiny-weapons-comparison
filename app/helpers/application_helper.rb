@@ -12,7 +12,7 @@ module ApplicationHelper
           <div class='col-xs-9'>
             <div class='progress'>
               <div class='progress-bar' style='width: #{data['first']['stats'][stat_name][:value]}%;'>
-                #{data['first']['stats'][stat_name][:value]}
+                &nbsp;#{data['first']['stats'][stat_name][:value]}
               </div>
             </div>
           </div>
@@ -26,7 +26,7 @@ module ApplicationHelper
           <div class='col-xs-9'>
             <div class='progress'>
               <div class='progress-bar' style='width: #{data['second']['stats'][stat_name][:value]}%;'>
-                #{data['second']['stats'][stat_name][:value]}
+                &nbsp;#{data['second']['stats'][stat_name][:value]}
               </div>
             </div>
           </div>

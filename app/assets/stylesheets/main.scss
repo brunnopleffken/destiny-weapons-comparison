@@ -208,6 +208,7 @@ form {
     background-color: #fff;
     box-shadow: none;
     color: #aaa;
+    font-size: 10px;
     text-align: left;
     &.upper {
       background-color: #7fc67a;
@@ -356,7 +357,7 @@ footer {
 }
 
 .select2-dropdown {
-  background-color: #000;
+  background-color: rgba(#000, 0.8);
 }
 
 .select2-search__field {
