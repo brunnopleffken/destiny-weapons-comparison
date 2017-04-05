@@ -1,9 +1,51 @@
 //= require jquery/dist/jquery.min
 //= require bootstrap/dist/js/bootstrap.min
+//= require select2/dist/js/select2.full.min
 //= require_tree .
 
 
 $(document).ready(function() {
+
+  /**
+   * Initialize Select2
+   */
+
+  $('.search-weapon').select2({
+    minimumInputLength: 3,
+    // escapeMarkup: function (markup) { return markup; },
+    templateResult: formatWeaponResult,
+    templateSelection: formatWeaponSelection,
+    ajax: {
+      cache: true,
+      dataType: 'json',
+      delay: 250,
+      url: 'https://www.bungie.net/Platform/Destiny/Explorer/Items/',
+      headers: {
+        'X-API-Key': 'e20758688ba94f4d8b18cf551c46d65b'
+      },
+      data: function(params) {
+        return {
+          'definitions': true,
+          'name': params.term,
+          'direction': 'Descending',
+          'order': 'MaximumRequiredLevel',
+          'categories': 1
+        }
+      },
+      processResults: function(data) {
+        return {
+          results: $.map(data.Response.definitions.items, function(item) {
+						return {
+              slug: item.itemName,
+							name: item.itemName,
+							icon: item.icon,
+							id: item.hash
+						};
+					})
+        }
+      }
+    }
+  });
 
   /**
    * Initialize Bootstrap components
@@ -81,3 +123,21 @@ $(document).ready(function() {
     window.location.href = '/' + primaryWeapon + '/' + secondaryWeapon + '?lang=' + language;
   });
 });
+
+function formatWeaponResult(weapon) {
+  console.log(weapon);
+  if (weapon.loading) return weapon.text;
+
+  var $state = $(
+    '<span class="select2_weapon-result">' +
+    '<img src="https://www.bungie.net' + weapon.icon + '">' +
+    '<strong>' + weapon.name + '</strong>' +
+    '</span>'
+  );
+
+  return $state;
+}
+
+function formatWeaponSelection(weapon) {
+  return weapon.name || weapon.text;
+}

@@ -18,11 +18,13 @@
       <form action="/" id="search-form">
         <div class="form-group">
           <label for="primary-weapon">Compare...</label>
-          <input type="text" class="form-control input-lg" id="primary-weapon" name="primary-weapon" placeholder="1000-Yard Stare" required>
+          <select name="primary-weapon" id="primary-weapon" class="form-control search-weapon"></select>
+          <!-- <input type="text" class="form-control input-lg" id="primary-weapon" name="primary-weapon" placeholder="1000-Yard Stare" required> -->
         </div>
         <div class="form-group">
           <label for="secondary-weapon">With...</label>
-          <input type="text" class="form-control input-lg" id="secondary-weapon" name="secondary-weapon" placeholder="Y-09 Longbow Synthesis" required>
+          <select name="secondary-weapon" id="secondary-weapon" class="form-control search-weapon"></select>
+          <!-- <input type="text" class="form-control input-lg" id="secondary-weapon" name="secondary-weapon" placeholder="Y-09 Longbow Synthesis" required> -->
         </div>
         <button class="btn btn-primary btn-block btn-lg" id="compare-button">Compare</button>
       </form>

@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap.min
+ *= require select2/dist/css/select2.min
  *= require main
  *= require_self
  */

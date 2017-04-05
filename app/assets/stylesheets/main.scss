@@ -329,3 +329,58 @@ footer {
 :-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.3) !important;
 }
+
+/**
+ * SELECT2
+ */
+
+.select2-selection--single {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: none !important;
+  color: #fff !important;
+  height: 32px !important;
+  &:focus {
+    box-shadow: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  }
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #fff !important;
+  line-height: 32px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.select2-dropdown {
+  background-color: #000;
+}
+
+.select2-search__field {
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  color: #fff;
+  padding-left: 0;
+  padding-right: 0;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.select2-results__option--highlighted {
+  background-color: #333 !important;
+}
+
+.select2_weapon-result {
+  overflow: auto;
+  img {
+    height: 40px;
+    margin-right: 10px;
+  }
+}
