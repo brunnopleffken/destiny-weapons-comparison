@@ -28,8 +28,8 @@ $(document).ready(function() {
           'definitions': true,
           'lc': $('#language').val(),
           'name': params.term,
-          'direction': 'Descending',
-          'order': 'MaximumRequiredLevel',
+          'direction': 'Ascending',
+          'order': 'Name',
           'categories': 1
         }
       },
