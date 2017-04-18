@@ -111,6 +111,7 @@ class HomeController < ApplicationController
     equip_speed = '943549884'
     recoil = '2715839340'
     zoom = '3555269338'
+    inventory = '1931675084'
 
     @weapon_comparison[order]['itemName'] = raw_data['data']['inventoryItem']['itemName']
     @weapon_comparison[order]['itemDescription'] = raw_data['data']['inventoryItem']['itemDescription']
@@ -139,6 +140,7 @@ class HomeController < ApplicationController
         when equip_speed then stat_type = 'equip_speed'
         when recoil then stat_type = 'recoil'
         when zoom then stat_type = 'zoom'
+        when inventory then stat_type = 'inventory'
       end
 
       @weapon_comparison[order]['stats'][stat_type] = {
