@@ -35,6 +35,34 @@ class HomeController < ApplicationController
     @description = "Destiny Weapons Comparison - #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
   end
 
+  def search_autocomplete
+    # Check if API key is defined in config/initializers
+    raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
+
+    # Define basic parameters
+    source = URI("https://www.bungie.net/Platform/Destiny/Explorer/Items/")
+    parameters = {
+      :definitions => true,
+      :lc => params[:language],
+      :name => params[:term],
+      :direction => 'Ascending',
+      :order => 'Name',
+      :categories => 1
+    }
+
+    # Create new HTTP request
+    source.query = URI.encode_www_form(parameters)
+    request = Net::HTTP::Get.new(source)
+    request['X-Api-Key'] = Rails.configuration.destiny_api_key
+
+    # Get response
+    response = Net::HTTP.start(source.hostname, source.port, :use_ssl => source.scheme == 'https') do |http|
+      http.request(request)
+    end
+
+    render json: response.body
+  end
+
   private
 
   def get_from_api(hash_id)

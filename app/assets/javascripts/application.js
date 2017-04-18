@@ -19,30 +19,22 @@ $(document).ready(function() {
       cache: true,
       dataType: 'json',
       delay: 250,
-      url: 'https://www.bungie.net/Platform/Destiny/Explorer/Items/',
-      headers: {
-        'X-API-Key': 'e20758688ba94f4d8b18cf551c46d65b'
-      },
+      url: '/search/' + $('#language').val(),
       data: function(params) {
         return {
-          'definitions': true,
-          'lc': $('#language').val(),
-          'name': params.term,
-          'direction': 'Ascending',
-          'order': 'Name',
-          'categories': 1
+          'term': params.term
         }
       },
       processResults: function(data) {
         return {
           results: $.map(data.Response.definitions.items, function(item) {
-						return {
+            return {
               slug: item.itemName,
-							name: item.itemName,
-							icon: item.icon,
-							id: item.hash
-						};
-					})
+              name: item.itemName,
+              icon: item.icon,
+              id: item.hash
+            };
+          })
         }
       }
     }
