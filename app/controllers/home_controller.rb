@@ -40,7 +40,7 @@ class HomeController < ApplicationController
     raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
 
     # Define basic parameters
-    source = URI("https://www.bungie.net/Platform/Destiny/Explorer/Items/")
+    source = URI("https://www.bungie.net/d1/Platform/Destiny/Explorer/Items/")
     parameters = {
       :definitions => true,
       :lc => params[:language],
@@ -70,7 +70,7 @@ class HomeController < ApplicationController
     raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
 
     # Define basic parameters
-    source = URI("https://www.bungie.net/Platform/Destiny/Manifest/6/#{hash_id}/")
+    source = URI("https://www.bungie.net/d1/Platform/Destiny/Manifest/6/#{hash_id}/")
     parameters = {
       :definitions => true,
       :lc => @language
