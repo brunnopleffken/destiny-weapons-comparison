@@ -1,12 +1,4 @@
-class HomeController < ApplicationController
-  require 'net/http'
-
-  def index
-    @title = 'Destiny Weapons Comparison'
-    @description = 'Compare Destiny weapons stats! Rate of fire, range, stability, but also compare useful hidden stats like aim assistance and recoil.'
-    @language = 'en'
-  end
-
+class D1::SearchController < ApplicationController
   def compare
     # Get parameters
     @first = params[:first_weapon]
@@ -31,36 +23,27 @@ class HomeController < ApplicationController
     parse_weapon_stats(raw_first_weapon_stats['Response'], 'first')
     parse_weapon_stats(raw_second_weapon_stats['Response'], 'second')
 
-    @title = "DWC | #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
+    @title = "#{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']} | Destiny Weapons Comparison"
     @description = "Destiny Weapons Comparison - #{@weapon_comparison['first']['itemName']} vs. #{@weapon_comparison['second']['itemName']}"
   end
 
-  def search_autocomplete
+  def autocomplete
     # Check if API key is defined in config/initializers
-    raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
+    raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key.blank?
 
-    # Define basic parameters
-    source = URI("https://www.bungie.net/d1/Platform/Destiny/Explorer/Items/")
-    parameters = {
-      :definitions => true,
-      :lc => params[:language],
-      :name => params[:term],
-      :direction => 'Ascending',
-      :order => 'Name',
-      :categories => 1
-    }
+    results = RestClient.get('https://www.bungie.net/d1/Platform/Destiny/Explorer/Items/', {
+      'X-Api-Key': Rails.configuration.destiny_api_key,
+      params: {
+        definitions: true,
+        lc: params[:language],
+        name: params[:term],
+        direction: 'Ascending',
+        order: 'Name',
+        categories: 1
+      }
+    })
 
-    # Create new HTTP request
-    source.query = URI.encode_www_form(parameters)
-    request = Net::HTTP::Get.new(source)
-    request['X-Api-Key'] = Rails.configuration.destiny_api_key
-
-    # Get response
-    response = Net::HTTP.start(source.hostname, source.port, :use_ssl => source.scheme == 'https') do |http|
-      http.request(request)
-    end
-
-    render json: response.body
+    render json: results and return
   end
 
   private
@@ -69,27 +52,16 @@ class HomeController < ApplicationController
     # Check if API key is defined in config/initializers
     raise "The Bungie API key is not defined." if Rails.configuration.destiny_api_key == ''
 
-    # Define basic parameters
-    source = URI("https://www.bungie.net/d1/Platform/Destiny/Manifest/6/#{hash_id}/")
-    parameters = {
-      :definitions => true,
-      :lc => @language
-    }
+    results = RestClient.get("https://www.bungie.net/d1/Platform/Destiny/Manifest/6/#{hash_id}/", {
+      'X-Api-Key': Rails.configuration.destiny_api_key,
+      params: {
+        definitions: true,
+        lc: @language
+      }
+    })
 
-    # Create new HTTP request
-    source.query = URI.encode_www_form(parameters)
-    request = Net::HTTP::Get.new(source)
-    request['X-Api-Key'] = Rails.configuration.destiny_api_key
-
-    # Get response
-    response = Net::HTTP.start(source.hostname, source.port, :use_ssl => source.scheme == 'https') do |http|
-      http.request(request)
-    end
-
-    return JSON.parse(response.body)
+    return JSON.parse(results)
   end
-
-  # ------------------
 
   def parse_weapon_stats(raw_data, order)
     @weapon_comparison[order] = {}
@@ -163,5 +135,4 @@ class HomeController < ApplicationController
       }
     end
   end
-
 end

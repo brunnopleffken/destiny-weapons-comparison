@@ -1,25 +1,24 @@
 //= require jquery/dist/jquery.min
-//= require bootstrap/dist/js/bootstrap.min
+//= require bootstrap/dist/js/bootstrap.bundle.min
 //= require select2/dist/js/select2.full.min
-//= require_tree .
 
 
 $(document).ready(function() {
 
-  /**
-   * Initialize Select2
-   */
+  $('[data-toggle="tooltip"]').tooltip();
 
-  $('.search-weapon').select2({
+  /**
+   * Search form for DESTINY 1 weapons
+   */
+  $('.d1-search-weapon').select2({
     minimumInputLength: 3,
-    // escapeMarkup: function (markup) { return markup; },
-    templateResult: formatWeaponResult,
-    templateSelection: formatWeaponSelection,
+    templateResult: formatD1WeaponResult,
+    templateSelection: formatD1WeaponSelection,
     ajax: {
       cache: true,
       dataType: 'json',
       delay: 250,
-      url: '/search/' + $('#language').val(),
+      url: '/d1/search/' + $('#language').val(),
       data: function(params) {
         return {
           'term': params.term
@@ -40,16 +39,24 @@ $(document).ready(function() {
     }
   });
 
-  /**
-   * Initialize Bootstrap components
-   */
-  $('[data-toggle="tooltip"]').tooltip();
+  $('#d1-search-form').on('submit', function(event) {
+    // Get values
+    var primaryWeapon = $('#primary-weapon').val();
+    var secondaryWeapon = $('#secondary-weapon').val();
+    var language = $('#language').val();
+
+    // Don't submit the form in the ordinary way
+    event.preventDefault();
+
+    // Redirect
+    window.location.href = '/d1/' + primaryWeapon + '/' + secondaryWeapon + '?lang=' + language;
+  });
 
   /**
    * Change placeholder when changing language
    */
   $('#language').on('change', function() {
-    console.log($(this).val());
+    var button = null;
 
     switch ($(this).val()) {
       case 'de':
@@ -79,27 +86,9 @@ $(document).ready(function() {
 
     $('#compare-button').html(button);
   });
-
-
-  /**
-   * Search form
-   */
-  $('#search-form').on('submit', function(event) {
-    // Get values
-    var primaryWeapon = $('#primary-weapon').val();
-    var secondaryWeapon = $('#secondary-weapon').val();
-    var language = $('#language').val();
-
-    // Don't submit the form in the ordinary way
-    event.preventDefault();
-
-    // Redirect
-    window.location.href = '/' + primaryWeapon + '/' + secondaryWeapon + '?lang=' + language;
-  });
 });
 
-function formatWeaponResult(weapon) {
-  console.log(weapon);
+function formatD1WeaponResult(weapon) {
   if (weapon.loading) return weapon.text;
 
   var $state = $(
@@ -112,6 +101,6 @@ function formatWeaponResult(weapon) {
   return $state;
 }
 
-function formatWeaponSelection(weapon) {
+function formatD1WeaponSelection(weapon) {
   return weapon.name || weapon.text;
 }

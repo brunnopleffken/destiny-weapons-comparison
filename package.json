@@ -1,0 +1,10 @@
+{
+  "name": "destiny-weapons-comparison",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.1.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "select2": "^4.0.6-rc.1"
+  }
+}

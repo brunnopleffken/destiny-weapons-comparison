@@ -1,0 +1,65 @@
+<body class="destiny1">
+  <%= render 'shared/d1_nav' %>
+
+  <div class="container home">
+    <div class="row">
+      <div class="col-12">
+        <h1>Destiny Weapons Comparison</h1>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-8">
+        <p>Compare the known weapons' stats of Destiny 1 like rate of fire, range, stability, but also compare useful hidden stats between weapons, like <strong>aim assistance</strong> and <strong>recoil</strong>. Let's get started?</p>
+      </div>
+    </div>
+
+    <div class="row mb-5">
+      <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <form action="/" id="d1-search-form">
+          <div class="form-group">
+            <label for="primary-weapon">Compare...</label>
+            <select name="primary-weapon" id="primary-weapon" class="form-control d1-search-weapon"></select>
+          </div>
+          <div class="form-group">
+            <label for="secondary-weapon">With...</label>
+            <select name="secondary-weapon" id="secondary-weapon" class="form-control d1-search-weapon"></select>
+          </div>
+          <button class="btn btn-primary btn-block btn-lg" id="compare-button">Compare</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row faq py-5">
+      <div class="col-md-6">
+        <h1>What's new!</h1>
+        <h4>August 30th, 2017</h4>
+        <ul>
+          <li>Changed HTTP request URLs to make use of Bungie's legacy API for Destiny 1. The weapon comparator for Destiny 2 will come soon.</li>
+        </ul>
+        <h4>April 18th, 2017</h4>
+        <ul>
+          <li>Added <strong>Inventory Size</strong> to the stats results. The inventory size is the total amount of ammo you can carry in your reserves. For example: Longbow Synthesis has less inventory size, so it carries less ammo than LDR 5001.</li>
+        </ul>
+        <h4>April 5th, 2017</h4>
+        <ul>
+          <li>Search autocomplete.</li>
+          <li>The search results URL now contains the exact item hash, not the search term.</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h1>FAQ</h1>
+        <h4>From where do you get those data?</h4>
+        <p>Directly from Bungie! We don't store any data. We don't have any database. ZERO kilobytes of stored data. All weapons stats and information are got from Bungie's API and processed in real-time by our app. The official application and Bungie's website uses the same API.</p>
+        <h4>I'm not finding the weapon. What am I doing wrong?</h4>
+        <p>First, check if the weapon's name is typed correctly. If so, maybe the Bungie API is missing something. Yes, their API is fault and there's some missing weapons like Boolean Gemini and Colovance's Duty. These weapons just doesn't appear in their API!</p>
+        <h4>I got an error in a weapon stat. What can I do?</h4>
+        <p>Nothing. As I said, we don't store any data and we're not able to correct any wrong value.</p>
+        <h4>I'd like to contribute with new ideas!</h4>
+        <p>Nice! You can contact me on <a href="https://twitter.com/brunnopleffken" target="_blank">Twitter</a> or open an issue in the <a href="https://github.com/brunnopleffken/destiny-weapons-comparison" target="_blank">GitHub repository</a>. Yes, this app is open-source.</p>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'shared/d1_footer' %>
+</body>
