@@ -1,4 +1,4 @@
-class SearchController < ApplicationController
+class D2::SearchController < ApplicationController
   def index
     #
   end
