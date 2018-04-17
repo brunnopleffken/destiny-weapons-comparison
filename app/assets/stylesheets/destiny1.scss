@@ -1,15 +1,15 @@
 body.destiny1 {
+  background-attachment: fixed;
   background-image: image-url('destiny1_background.jpg');
-  background-repeat: no-repeat;
-  background-position: top;
+  background-position: center;
   background-size: cover;
   color: #fff;
   font-size: 14px;
   .navbar {
     &.navbar-default {
-      background-color: #758181;
+      background-color: #8f9a9c;
       border: 0;
-      border-bottom: 4px solid #919c9c;
+      border-bottom: 4px solid #a3acab;
     }
   }
 
@@ -191,6 +191,7 @@ body.destiny1 {
     border-radius: 0;
     box-shadow: none;
     margin-bottom: 0;
+    height: 21px;
     .progress-bar {
       background-color: #fff;
       box-shadow: none;
