@@ -2,6 +2,7 @@ body.destiny2 {
   background-image: image-url('destiny2_main_background.jpg');
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
   color: #fff;
   font-size: 14px;
 
@@ -16,6 +17,55 @@ body.destiny2 {
     &:hover {
       background-color: rgba(#000, 0.4);
       border: 1px solid rgba(#fff, 0.6);
+    }
+  }
+
+  .results {
+    .title {
+      margin-bottom: 15px;
+      overflow: hidden;
+      img {
+        border: 1px solid #fff;
+        float: left;
+        height: 60px;
+        margin-right: 10px;
+      }
+      h2 {
+        font-size: 26px;
+        font-weight: 600;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      h3 {
+        color: #dadada;
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        margin: 0;
+        text-transform: uppercase;
+      }
+    }
+    .lead {
+      color: #eee;
+      font-size: 12px;
+      font-style: italic;
+      letter-spacing: 0.05em;
+      line-height: 1em;
+      margin: 0 0 30px;
+    }
+    .attack {
+      margin-bottom: 30px;
+      overflow: hidden;
+      img {
+        float: left;
+        height: 30px;
+        margin-right: 10px;
+      }
+      .value {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 30px;
+      }
     }
   }
 

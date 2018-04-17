@@ -1,0 +1,56 @@
+<body class="destiny2">
+  <%= render 'shared/d2_nav' %>
+
+  <div class="container-fluid results">
+    <!-- Name, image and description -->
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col">
+        <div class="title">
+          <%= image_tag "https://www.bungie.net/#{@weapon_comparison['first']['icon']}" %>
+          <h2><%= @weapon_comparison['first']['name'] %></h2>
+          <h3><%= @weapon_comparison['first']['itemTypeName'] %></h3>
+        </div>
+        <p class="lead"><%= @weapon_comparison['first']['description'] %></p>
+      </div>
+      <div class="col">
+        <div class="title">
+          <%= image_tag "https://www.bungie.net/#{@weapon_comparison['second']['icon']}" %>
+          <h2><%= @weapon_comparison['second']['name'] %></h2>
+          <h3><%= @weapon_comparison['second']['itemTypeName'] %></h3>
+        </div>
+        <p class="lead"><%= @weapon_comparison['second']['description'] %></p>
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+    <!-- Attack and damage type -->
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col">
+        <div class="attack">
+          <%= image_tag "https://www.bungie.net/#{@weapon_comparison['first']['damageTypes']['icon']}", data: { toggle: 'tooltip', title: @weapon_comparison['first']['damageTypes']['name'] } %>
+          <div class="value"><%= @weapon_comparison['first']['stats']['attack'][:value] %></div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="attack">
+          <%= image_tag "https://www.bungie.net/#{@weapon_comparison['second']['damageTypes']['icon']}", data: { toggle: 'tooltip', title: @weapon_comparison['second']['damageTypes']['name'] } %>
+          <div class="value"><%= @weapon_comparison['second']['stats']['attack'][:value] %></div>
+        </div>
+      </div>
+      <div class="col-2"></div>
+    </div>
+
+
+
+    <hr>
+
+
+
+    <div class="row">
+      <div class="col-6"><%= debug @weapon_comparison['first'] %></div>
+      <div class="col-6"><%= debug @weapon_comparison['second'] %></div>
+    </div>
+  </div>
+</body>
