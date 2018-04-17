@@ -53,6 +53,52 @@ $(document).ready(function() {
   });
 
   /**
+   * Search form for DESTINY 1 weapons
+   */
+  $('.d2-search-weapon').select2({
+    minimumInputLength: 3,
+    templateResult: formatD1WeaponResult,
+    templateSelection: formatD1WeaponSelection,
+    ajax: {
+      cache: true,
+      dataType: 'json',
+      delay: 250,
+      url: '/d2/search/' + $('#language').val(),
+      data: function(params) {
+        return {
+          'term': params.term
+        }
+      },
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            console.log(item);
+            return {
+              slug: item.displayProperties.name,
+              name: item.displayProperties.name,
+              icon: item.displayProperties.icon,
+              id: item.hash
+            };
+          })
+        }
+      }
+    }
+  });
+
+  $('#d2-search-form').on('submit', function(event) {
+    // Get values
+    var primaryWeapon = $('#search_first_weapon').val();
+    var secondaryWeapon = $('#search_second_weapon').val();
+    var language = $('#language').val();
+
+    // Don't submit the form in the ordinary way
+    event.preventDefault();
+
+    // Redirect
+    window.location.href = '/d2/' + primaryWeapon + '/' + secondaryWeapon + '?lang=' + language;
+  });
+
+  /**
    * Change placeholder when changing language
    */
   $('#language').on('change', function() {

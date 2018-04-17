@@ -1,0 +1,25 @@
+<body class="destiny2">
+  <%= render 'shared/d2_nav' %>
+
+  <section>
+    <div class="container-fluid">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-4">
+          <%= form_for :search, html: { class: 'search', id: 'd2-search-form' } do |f| %>
+            <div class="form-group">
+              <%= f.select :first_weapon, {}, {}, { class: 'form-control d2-search-weapon' } %>
+            </div>
+            <div class="form-group">
+              <%= f.select :second_weapon, {}, {}, { class: 'form-control d2-search-weapon' } %>
+            </div>
+            <div class="text-center">
+              <%= f.submit 'Compare', class: 'btn' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%= render 'shared/d2_footer' %>
+</body>

@@ -1,3 +1,78 @@
 body.destiny2 {
-  background-color: #000;
+  background-image: image-url('destiny2_main_background.jpg');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  font-size: 14px;
+
+  .btn {
+    background-color: rgba(#000, 0.2);
+    border: 1px solid rgba(#fff, 0.4);
+    border-radius: 0;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 1em 3em;
+    &:hover {
+      background-color: rgba(#000, 0.4);
+      border: 1px solid rgba(#fff, 0.6);
+    }
+  }
+
+  footer {
+    background-color: rgba(#000, 0.5);
+    padding-bottom: 10px;
+    padding-top: 10px;
+    a { color: #fff; }
+    img {
+      height: 17px;
+      margin: 0 5px;
+      vertical-align: text-top;
+    }
+  }
+
+  .select2-selection--single {
+    background-color: rgba(#000, 0.3);
+    border: 1px solid rgba(#fff, 0.4);
+    border-radius: 0;
+    height: 32px;
+    .select2-selection__rendered {
+      color: #fff;
+      line-height: 30px;
+    }
+    .select2-selection__arrow b {
+      border-color: #ccc transparent transparent transparent;
+      margin-top: 0;
+    }
+  }
+
+  .select2-dropdown {
+    background-color: rgba(#000, 0.8);
+  }
+
+  .select2-search__field {
+    background-color: transparent;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: none;
+    color: #fff;
+    padding-left: 0;
+    padding-right: 0;
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  .select2-results__option--highlighted {
+    background-color: #333 !important;
+  }
+
+  .select2_weapon-result {
+    overflow: auto;
+    img {
+      height: 40px;
+      margin-right: 10px;
+    }
+  }
 }
