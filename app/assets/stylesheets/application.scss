@@ -1,6 +1,8 @@
 /*
  *= require bootstrap/dist/css/bootstrap.min
  *= require select2/dist/css/select2.min
+ *= require fonts
+ *= require home
  *= require destiny1
  *= require destiny2
  *= require_self
@@ -8,15 +10,6 @@
 
 html { height: 100%; }
 
-body.home {
-  background-image: asset_url('destiny2_background.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100%;
-  .container-fluid {
-    height: 100%;
-    .row {
-      height: 100%;
-    }
-  }
+body {
+  font-family: 'Neue Haas Grotesk', Arial, sans-serif;
 }

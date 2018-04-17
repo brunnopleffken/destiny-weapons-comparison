@@ -1,15 +1,22 @@
 <body class="home">
   <main class="container-fluid">
     <div class="row align-items-center">
-      <div class="col text-center">
-        <%= link_to d1_root_path do %>
-          <%= image_tag 'logo_destiny.png', style: 'height: 100px' %>
-        <% end %>
-      </div>
-      <div class="col text-center">
-        <%= link_to d2_root_path do %>
-          <%= image_tag 'logo_destiny2.png', style: 'height: 100px' %>
-        <% end %>
+      <div class="col">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h1>Choose your Destiny</h1>
+          </div>
+          <div class="col text-center">
+            <%= link_to d1_root_path do %>
+              <%= image_tag 'logo_destiny.png', style: 'height: 100px' %>
+            <% end %>
+          </div>
+          <div class="col text-center">
+            <%= link_to d2_root_path do %>
+              <%= image_tag 'logo_destiny2.png', style: 'height: 100px' %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </main>
