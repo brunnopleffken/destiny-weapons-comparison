@@ -1,5 +1,20 @@
 @font-face {
   font-family: "Neue Haas Grotesk";
+  font-weight: 300;
+  src: url("/fonts/NHaasGroteskDSPro-45Lt.otf") format("opentype"),
+       url("/fonts/NHaasGroteskDSPro-45Lt.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk";
+  font-weight: 300;
+  font-style: italic;
+  src: url("/fonts/NHaasGroteskDSPro-46LtIt.otf") format("opentype"),
+       url("/fonts/NHaasGroteskDSPro-46LtIt.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk";
   font-weight: 400;
   src: url("/fonts/NHaasGroteskTXPro-55Rg.otf") format("opentype"),
        url("/fonts/NHaasGroteskTXPro-55Rg.ttf") format("truetype");
@@ -11,6 +26,21 @@
   font-style: italic;
   src: url("/fonts/NHaasGroteskTXPro-56It.otf") format("opentype"),
        url("/fonts/NHaasGroteskTXPro-56It.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk";
+  font-weight: 600;
+  src: url("/fonts/NHaasGroteskTXPro-65Md.otf") format("opentype"),
+       url("/fonts/NHaasGroteskTXPro-65Md.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Neue Haas Grotesk";
+  font-weight: 600;
+  font-style: italic;
+  src: url("/fonts/NHaasGroteskTXPro-66MdIt.otf") format("opentype"),
+       url("/fonts/NHaasGroteskTXPro-66MdIt.ttf") format("truetype");
 }
 
 @font-face {
