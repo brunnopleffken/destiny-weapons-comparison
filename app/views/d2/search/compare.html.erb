@@ -1,7 +1,7 @@
 <body class="destiny2">
   <%= render 'shared/d2_nav' %>
 
-  <div class="container-fluid results">
+  <div class="container results mb-5">
     <!-- Name, image and description -->
     <div class="row">
       <div class="col-2"></div>
@@ -42,15 +42,44 @@
       <div class="col-2"></div>
     </div>
 
-
-
-    <hr>
-
-
-
+    <!-- Visible stats -->
     <div class="row">
-      <div class="col-6"><%= debug @weapon_comparison['first'] %></div>
-      <div class="col-6"><%= debug @weapon_comparison['second'] %></div>
+      <div class="col-12 block-title">
+        <span>Visible statistics</span>
+      </div>
+    </div>
+    <%= render_d2_stat_row(@weapon_comparison, 'impact') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'range') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'stability') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'handling') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'reload') %>
+    <%= render_d2_plain_stat_row(@weapon_comparison, 'rounds_per_minute') %>
+    <%= render_d2_plain_stat_row(@weapon_comparison, 'magazine') %>
+
+    <!-- Hidden stats -->
+    <div class="row mt-4">
+      <div class="col-12 block-title">
+        <span>Hidden statistics</span>
+      </div>
+    </div>
+    <%= render_d2_stat_row(@weapon_comparison, 'aim_assist') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'recoil') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'inventory') %>
+    <%= render_d2_stat_row(@weapon_comparison, 'zoom') %>
+
+    <!-- Lore -->
+    <div class="row mt-4">
+      <div class="col-12 block-title">
+        <span>Lore</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col"><%= render_d2_lore(@weapon_comparison['first']['lore']) %></div>
+      <div class="col"><%= render_d2_lore(@weapon_comparison['second']['lore']) %></div>
+      <div class="col-2"></div>
     </div>
   </div>
+
+  <%= render 'shared/d2_footer' %>
 </body>

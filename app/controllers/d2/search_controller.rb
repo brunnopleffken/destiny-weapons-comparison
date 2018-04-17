@@ -11,6 +11,9 @@ class D2::SearchController < ApplicationController
     parse_weapon_stats(raw_first_weapon_stats, 'first')
     parse_weapon_stats(raw_second_weapon_stats, 'second')
 
+    @first_weapon = raw_first_weapon_stats
+    @second_weapon = raw_second_weapon_stats
+
     @title = "#{@weapon_comparison['first']['name']} vs. #{@weapon_comparison['second']['name']} | Destiny Weapons Comparison"
   end
 
@@ -22,7 +25,7 @@ class D2::SearchController < ApplicationController
 
     query = ActiveRecord::Base.connection
       .exec_query("SELECT json FROM DestinyInventoryItemDefinition
-        WHERE json LIKE '%\"name\":\"%#{params[:term]}%\"%'
+        WHERE json LIKE '%\"name\":\"#{params[:term]}%\"%'
         AND json LIKE '%\"itemType\":3%';")
 
     query.rows.each do |r|
@@ -80,7 +83,7 @@ class D2::SearchController < ApplicationController
     @weapon_comparison[order]['tierTypeName'] = get_tier_type_name(raw_data['inventory']['tierTypeHash'])
     @weapon_comparison[order]['itemTypeName'] = raw_data['itemTypeDisplayName']
     @weapon_comparison[order]['damageTypes'] = get_damage_type_definition(raw_data['defaultDamageTypeHash'])
-    @weapon_comparison[order]['sources'] = []
+    @weapon_comparison[order]['lore'] = get_lore_definition(raw_data['loreHash'])
 
     # Define stats order
     @weapon_comparison[order]['stats'] = {}
@@ -139,5 +142,22 @@ class D2::SearchController < ApplicationController
       .exec_query("SELECT * FROM DestinyDamageTypeDefinition WHERE id = '#{hash}';")
 
     return JSON.parse(query.rows[0][1])['displayProperties']
+  end
+
+  def get_lore_definition(hash)
+    hash = calculate_hash(hash)
+
+    if hash != 0
+      query = ActiveRecord::Base.connection
+        .exec_query("SELECT * FROM DestinyLoreDefinition WHERE id = '#{hash}';")
+      result = JSON.parse(query.rows[0][1])
+
+      return {
+        subtitle: result['subtitle'],
+        description: result['displayProperties']['description']
+      }
+    else
+      return {}
+    end
   end
 end
