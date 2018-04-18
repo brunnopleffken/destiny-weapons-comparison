@@ -1,4 +1,6 @@
 class D2::SearchController < ApplicationController
+  before_action :random_d2_emblem
+
   def compare
     # Get parameters
     @first = params[:first_weapon]
