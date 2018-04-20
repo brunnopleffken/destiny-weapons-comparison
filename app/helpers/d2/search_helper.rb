@@ -1,24 +1,24 @@
 module D2::SearchHelper
   def render_d2_stat_row(data, stat_name)
     return "<div class='row stat-row'>
-      <div class='col-2 text-right stat-label' data-toggle='tooltip' data-placement='right' title='#{data['first']['stats'][stat_name][:statDescription]}'>
+      <div class='col-5 col-sm-2 text-right stat-label' data-toggle='tooltip' data-placement='right' title='#{data['first']['stats'][stat_name][:statDescription]}'>
         #{data['first']['stats'][stat_name][:statName]}
       </div>
-      <div class='col'>
+      <div class='col d-none d-sm-block'>
         <div class='progress'>
           <div class='progress-bar' style='width: #{data['first']['stats'][stat_name][:value]}%;'>
             #{data['first']['stats'][stat_name][:value]}
           </div>
         </div>
       </div>
-      <div class='col'>
+      <div class='col d-none d-sm-block'>
         <div class='progress'>
           <div class='progress-bar' style='width: #{data['second']['stats'][stat_name][:value]}%;'>
             #{data['second']['stats'][stat_name][:value]}
           </div>
         </div>
       </div>
-      <div class='col-2'>
+      <div class='col col-sm-2'>
         #{stats_diff(data['first']['stats'][stat_name][:value], data['second']['stats'][stat_name][:value])}
       </div>
     </div>".html_safe
@@ -26,12 +26,12 @@ module D2::SearchHelper
 
   def render_d2_plain_stat_row(data, stat_name)
     return "<div class='row stat-row'>
-      <div class='col-2 text-right stat-label' data-toggle='tooltip' data-placement='right' title='#{data['first']['stats'][stat_name][:statDescription]}'>
+      <div class='col-5 col-sm-2 text-right stat-label' data-toggle='tooltip' data-placement='right' title='#{data['first']['stats'][stat_name][:statDescription]}'>
         #{data['first']['stats'][stat_name][:statName]}
       </div>
-      <div class='col'>#{data['first']['stats'][stat_name][:value]}</div>
-      <div class='col'>#{data['second']['stats'][stat_name][:value]}</div>
-      <div class='col-2'>#{plain_diff(data['first']['stats'][stat_name][:value], data['second']['stats'][stat_name][:value])}</div>
+      <div class='col d-none d-sm-block'>#{data['first']['stats'][stat_name][:value]}</div>
+      <div class='col d-none d-sm-block'>#{data['second']['stats'][stat_name][:value]}</div>
+      <div class='col col-sm-2'>#{plain_diff(data['first']['stats'][stat_name][:value], data['second']['stats'][stat_name][:value])}</div>
     </div>".html_safe
   end
 

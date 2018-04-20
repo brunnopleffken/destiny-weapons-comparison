@@ -1,7 +1,8 @@
 <nav class="navbar navbar-light bg-light mb-5" style="background-image: url('<%= @selected_emblem[:background] %>')">
   <%= link_to root_path, class: 'navbar-brand' do %>
     <img src="<%= @selected_emblem[:emblem] %>">
-    Destiny Weapons Comparison
+    <span class="d-inline-block d-sm-none">DWC</span>
+    <span class="d-none d-sm-inline-block">Destiny Weapons Comparison</span>
   <% end %>
   <div>
     <ul class="navbar-nav">

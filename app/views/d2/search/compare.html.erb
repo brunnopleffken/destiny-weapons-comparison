@@ -4,7 +4,7 @@
   <div class="container results mb-5">
     <!-- Name, image and description -->
     <div class="row">
-      <div class="col-2"></div>
+      <div class="col-sm-2"></div>
       <div class="col">
         <div class="title">
           <%= image_tag "https://www.bungie.net/#{@weapon_comparison['first']['icon']}" %>
@@ -21,11 +21,11 @@
         </div>
         <p class="lead"><%= @weapon_comparison['second']['description'] %></p>
       </div>
-      <div class="col-2"></div>
+      <div class="col-sm-2"></div>
     </div>
 
     <!-- Attack and damage type -->
-    <div class="row">
+    <div class="row d-none d-sm-flex">
       <div class="col-2"></div>
       <div class="col">
         <div class="attack">
@@ -74,10 +74,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-2"></div>
+      <div class="col-2 d-none d-sm-block"></div>
       <div class="col"><%= render_d2_lore(@weapon_comparison['first']['lore']) %></div>
       <div class="col"><%= render_d2_lore(@weapon_comparison['second']['lore']) %></div>
-      <div class="col-2"></div>
+      <div class="col-2 d-none d-sm-block"></div>
     </div>
   </div>
 
