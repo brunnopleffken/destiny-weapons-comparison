@@ -2,8 +2,7 @@ body.home {
   background-image: asset_url('destiny2_background.jpg');
   background-size: cover;
   background-position: center;
-  height: 100%;
-  position: relative;
+  height: 100vh;
   .container-fluid {
     height: 100%;
     .row {

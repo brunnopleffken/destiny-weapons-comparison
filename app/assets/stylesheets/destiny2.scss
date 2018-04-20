@@ -160,8 +160,11 @@ body.destiny2 {
 
   footer {
     background-color: rgba(#000, 0.5);
+    bottom: 0;
     padding-bottom: 10px;
     padding-top: 10px;
+    position: absolute;
+    width: 100%;
     a { color: #fff; }
     img {
       height: 17px;
