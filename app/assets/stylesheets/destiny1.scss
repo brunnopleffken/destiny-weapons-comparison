@@ -293,15 +293,16 @@ body.destiny1 {
     border-top: 2px solid #fff;
     bottom: 0;
     font-size: 13px;
-    line-height: 1;
+    line-height: 1em;
     margin-top: 30px;
     padding: 10px;
     position: absolute;
     text-align: right;
     width: 100%;
     img {
-      height: 14px;
+      height: 17px;
       margin: 0 5px;
+      vertical-align: text-top;
     }
     a {
       color: #fff;
