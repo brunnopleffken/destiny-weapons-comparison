@@ -27,7 +27,7 @@ class D2::SearchController < ApplicationController
 
     query = ActiveRecord::Base.connection
       .exec_query("SELECT json FROM DestinyInventoryItemDefinition
-        WHERE json LIKE '%\"name\":\"#{params[:term]}%\"%'
+        WHERE json LIKE '%\"name\":\"#{params[:term]}%'
         AND json LIKE '%\"itemType\":3%';")
 
     query.rows.each do |r|
