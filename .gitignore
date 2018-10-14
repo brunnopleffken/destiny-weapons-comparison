@@ -31,3 +31,6 @@
 
 # Destiny Weapons Comparison files
 /config/initializers/destiny_api.rb
+
+# macOS
+.DS_Store
